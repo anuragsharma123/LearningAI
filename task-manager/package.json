@@ -1,0 +1,41 @@
+{
+  "name": "task-manager",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Task manager MCP server built with Anthropic and the Model Context Protocol.",
+  "main": "task-server/index.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "server": "tsx task-server/index.ts",
+    "server:watch": "tsx watch task-server/index.ts",
+    "client": "tsx task-manager.ts",
+    "start": "tsx orchestrator.ts",
+    "gmail-agent": "tsx gmail-agent/index.ts",
+    "orchestrator": "tsx orchestrator.ts",
+    "filters": "tsx filter-cli.ts"
+  },
+  "keywords": [
+    "task-manager",
+    "anthropic",
+    "mcp",
+    "typescript"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.98.0",
+    "@lancedb/lancedb": "^0.30.0",
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "@xenova/transformers": "^2.17.2",
+    "dotenv": "^17.4.2",
+    "googleapis": "^172.0.0",
+    "node-cron": "^4.2.1",
+    "zod": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.2",
+    "@types/node-cron": "^3.0.11",
+    "tsx": "^4.16.5",
+    "typescript": "^5.5.4"
+  }
+}

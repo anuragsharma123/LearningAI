@@ -1,0 +1,7 @@
+node_modules/
+.env
+.DS_Store
+.lancedb/
+task-server/tasks.json
+gmail-agent/credentials/credentials.json
+gmail-agent/credentials/token.json
