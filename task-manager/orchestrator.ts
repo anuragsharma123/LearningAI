@@ -25,21 +25,38 @@
  *  │  2. getTodayEmails()  ─────────────────► Gmail API      │
  *  │     getLastTwoMonthsEmails()  ─────────► Gmail API      │
  *  │  3. Claude call (forced suggest_tasks tool)             │
- *  │     → returns TaskSuggestion[]                          │
+ *  │     → returns raw TaskSuggestion[]                      │
  *  │                                                         │
  *  │  NOTE: MCP is NOT used here.                            │
  *  │  This agent only reads email — no task writes.          │
  *  └────────────────────┬────────────────────────────────────┘
- *                       │ tool_result: TaskSuggestion[] (JSON)
+ *                       │ raw TaskSuggestion[]
+ *                       ▼
+ *  ┌─────────────────────────────────────────────────────────┐
+ *  │           FILTER RULES MCP SERVER                       │
+ *  │           filter-server/index.ts  (stdio)               │
+ *  │                                                         │
+ *  │  apply_filters(suggestions)                             │
+ *  │    → reads rules.json                                   │
+ *  │    → splits suggestions into three buckets:             │
+ *  │                                                         │
+ *  │  passed     ──► forwarded to Task Manager               │
+ *  │  alert_only ──► printed as ⚠ warning; no task created  │
+ *  │  drop       ──► silently discarded; counted only        │
+ *  │                                                         │
+ *  │  Example rule: HPSEBL electricity bill → alert_only     │
+ *  │  (email-address collision; not the user's bill)         │
+ *  └────────────────────┬────────────────────────────────────┘
+ *                       │ { passed, alerts, dropped_count }
  *                       ▼
  *  ┌─────────────────────────────────────────────────────────┐
  *  │               ORCHESTRATOR AGENT  (Claude)              │
  *  │                                                         │
- *  │  Receives suggestions, reasons about them:              │
+ *  │  Receives filtered suggestions, reasons about them:     │
  *  │  "I have N suggestions — call update_task_list"         │
  *  │  (or: "0 suggestions — nothing to do, report back")     │
  *  └────────────────────┬────────────────────────────────────┘
- *                       │ tool_use: update_task_list(suggestions)
+ *                       │ tool_use: update_task_list(passed suggestions)
  *                       ▼
  *  ┌─────────────────────────────────────────────────────────┐
  *  │           TASK MANAGER SUBAGENT  (Claude)               │
@@ -74,16 +91,16 @@
  * WHERE MCP IS (AND IS NOT) USED
  * ─────────────────────────────────────────────────────────────────────────────
  *
- *  ✅  Task Manager Subagent  — connects to MCP server over stdio.
+ *  ✅  Task Manager Subagent  — connects to task MCP server over stdio.
  *                               Claude calls list_tasks / create_task via MCP.
  *                               MCP reads/writes tasks.json.
  *
+ *  ✅  Gmail Subagent         — connects to filter-rules MCP server over stdio.
+ *                               Calls apply_filters; MCP reads rules.json.
+ *                               Server is spawned per-run and closed after.
+ *
  *  ❌  Orchestrator Agent     — does NOT use MCP.
  *                               Its tools are the two subagents, not MCP tools.
- *
- *  ❌  Gmail Subagent         — does NOT use MCP.
- *                               It only reads Gmail API; task creation is
- *                               deliberately delegated to the Task Manager.
  *
  * ─────────────────────────────────────────────────────────────────────────────
  * SCHEDULING

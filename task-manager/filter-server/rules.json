@@ -1,0 +1,11 @@
+[
+  {
+    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+    "name": "HPSEBL Electricity Bill",
+    "pattern": "HPSEBL",
+    "match_field": "any",
+    "action": "alert_only",
+    "reason": "Email ID collision — someone in Himachal Pradesh mapped their HPSEBL electricity bill to this Gmail address. Not a real task.",
+    "createdAt": "2026-05-30T00:00:00.000Z"
+  }
+]
