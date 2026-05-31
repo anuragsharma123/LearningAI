@@ -10,7 +10,8 @@
     "server:watch": "tsx watch task-server/index.ts",
     "client": "tsx task-manager.ts",
     "start": "tsx orchestrator.ts",
-    "gmail-agent": "tsx gmail-agent/index.ts",
+    "gmail-agent": "tsx gmail-server/gmail-agent/index.ts",
+    "gmail-server": "tsx gmail-server/index.ts",
     "orchestrator": "tsx orchestrator.ts",
     "filters": "tsx filter-cli.ts"
   },

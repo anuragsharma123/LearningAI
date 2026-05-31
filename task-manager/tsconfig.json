@@ -12,5 +12,6 @@
     "noEmit": true,
     "types": ["node"]
   },
-  "include": ["task-server/**/*.ts"]
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules"]
 }

@@ -130,7 +130,8 @@ export class MemoryManager {
    */
   async getConfirmedPatterns(): Promise<EmailPatternRecord[]> {
     const results = await this.emailPatterns
-      .filter("occurrence_count >= 2")
+      .query()
+      .where("occurrence_count >= 2")
       .toArray();
     return results as EmailPatternRecord[];
   }
@@ -175,7 +176,8 @@ export class MemoryManager {
     const cutoffStr = cutoff.toISOString();
 
     const recent = await this.taskHistory
-      .filter(`created_at >= '${cutoffStr}'`)
+      .query()
+      .where(`created_at >= '${cutoffStr}'`)
       .toArray() as TaskRecord[];
 
     for (const task of recent) {
@@ -225,7 +227,10 @@ export class MemoryManager {
    * Returns the N most recent pipeline runs, newest first.
    */
   async getRecentRuns(limit = 5): Promise<RunRecord[]> {
-    const results = await this.runHistory.toArray() as RunRecord[];
+    const results = await this.runHistory
+      .query()
+      .where("timestamp > '2000-01-01'")
+      .toArray() as RunRecord[];
     return results
       .sort((a, b) => b.timestamp.localeCompare(a.timestamp))
       .slice(0, limit);
@@ -270,7 +275,8 @@ export class MemoryManager {
     const cutoffStr = cutoff.toISOString();
 
     const recent = await this.taskHistory
-      .filter(`created_at >= '${cutoffStr}'`)
+      .query()
+      .where(`created_at >= '${cutoffStr}'`)
       .toArray() as TaskRecord[];
 
     if (recent.length === 0) return "";
