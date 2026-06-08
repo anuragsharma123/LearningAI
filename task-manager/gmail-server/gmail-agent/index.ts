@@ -9,7 +9,7 @@ import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js"
 import {
   getAuthClient,
   getTodayEmails,
-  getLastTwoMonthsEmails,
+  getEmailsSince,
   type EmailSummary
 } from "./gmail.js";
 import type { TaskSuggestion } from "../../task-server/types.js";
@@ -278,23 +278,26 @@ const SUGGEST_TASKS_TOOL: Anthropic.Tool = {
  *   uses this to recognise patterns it has seen before, even if worded differently.
  * @returns Array of {@link TaskSuggestion} objects ready to hand off to the Task Manager Agent.
  */
-export async function analyzeGmail(memoryContext = ""): Promise<TaskSuggestion[]> {
+export async function analyzeGmail(memoryContext = "", sinceDate?: Date): Promise<TaskSuggestion[]> {
   const auth = await getAuthClient();
 
   const [todayEmails, recentEmails] = await Promise.all([
     getTodayEmails(auth),
-    getLastTwoMonthsEmails(auth)
+    getEmailsSince(auth, sinceDate)   // sinceDate = last run; undefined = 2-month fallback
   ]);
 
+  const windowLabel = sinceDate
+    ? `since ${sinceDate.toISOString().slice(0, 10)}`
+    : "last 2 months";
   console.log(
-    `  ✓ ${todayEmails.length} emails today · ${recentEmails.length} over last 2 months`
+    `  ✓ ${todayEmails.length} emails today · ${recentEmails.length} emails ${windowLabel}`
   );
 
   const userMessage = [
     formatEmailsForPrompt(todayEmails, "TODAY'S EMAILS"),
     "---",
-    formatEmailsForPrompt(recentEmails, "EMAILS FROM THE LAST 2 MONTHS"),
-    memoryContext   // injected by orchestrator — empty string on first run
+    formatEmailsForPrompt(recentEmails, `EMAILS FROM ${windowLabel.toUpperCase()}`),
+    memoryContext
   ].join("\n\n");
 
   const response = await anthropicClient.messages.create({

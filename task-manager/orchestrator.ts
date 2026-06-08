@@ -107,6 +107,20 @@ dotenv.config();
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+const API_SERVER_URL = process.env.API_SERVER_URL ?? "http://localhost:3001";
+const API_KEY        = process.env.API_KEY ?? "";
+
+/** Fire-and-forget POST to the API server's internal event webhook. */
+async function postEvent(payload: Record<string, unknown>): Promise<void> {
+  try {
+    await fetch(`${API_SERVER_URL}/internal/events`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${API_KEY}` },
+      body: JSON.stringify(payload)
+    });
+  } catch { /* non-fatal — API server may not be running */ }
+}
+
 const anthropicClient = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
 const ORCHESTRATOR_PROMPT = fs.readFileSync(
@@ -175,6 +189,7 @@ async function callTool(
   runCtx: {
     rawSuggestions: TaskSuggestion[];
     runId: string;
+    lastRunTimestamp?: string;
     setRawSuggestions: (s: TaskSuggestion[]) => void;
   }
 ): Promise<string> {
@@ -188,6 +203,10 @@ async function callTool(
     if (memCtx) {
       toolInput = { ...toolInput, memory_context: memCtx };
       console.log("  │  [Memory] Injecting known patterns");
+    }
+    if (runCtx.lastRunTimestamp) {
+      toolInput = { ...toolInput, since_date: runCtx.lastRunTimestamp };
+      console.log(`  │  [Memory] Fetching emails since last run: ${runCtx.lastRunTimestamp.slice(0, 10)}`);
     }
   }
 
@@ -231,6 +250,8 @@ async function callTool(
           console.log(`  │  📬 "${alert.suggestion.title}"`);
           console.log(`  │     Rule:   ${alert.matched_rule.name}`);
           console.log(`  │     Reason: ${alert.matched_rule.reason}`);
+          // Broadcast to UI via API server
+          postEvent({ type: "filter_alert", suggestion: alert.suggestion, matched_rule: alert.matched_rule });
         }
         console.log("  └────────────────────────────────────────────────────────────────\n");
       }
@@ -242,11 +263,13 @@ async function callTool(
 
   if (toolName === "create_task" && text.startsWith("Task created:")) {
     try {
-      const title = (toolInput as { title?: string }).title ?? "";
+      const input = toolInput as { title?: string; description?: string };
       const matched = runCtx.rawSuggestions.find(
-        (s) => s.title.toLowerCase() === title.toLowerCase()
+        (s) => s.title.toLowerCase() === (input.title ?? "").toLowerCase()
       );
       if (matched) await memory.storeTask(matched, runCtx.runId);
+      // Broadcast to UI via API server
+      postEvent({ type: "task_created", title: input.title, description: input.description });
     } catch { /* non-fatal */ }
   }
 
@@ -267,6 +290,10 @@ async function runOrchestratorAgent(): Promise<void> {
   let rawSuggestions: TaskSuggestion[] = [];
   let totalCreated = 0;
   let totalSkipped = 0;
+
+  // Get last run timestamp so Gmail fetch is scoped to new emails only
+  const recentRuns = await memory.getRecentRuns(1);
+  const lastRunTimestamp = recentRuns[0]?.timestamp;
 
   const { clients, tools, toolRouter } = await connectMcpServers();
 
@@ -309,6 +336,7 @@ async function runOrchestratorAgent(): Promise<void> {
           {
             rawSuggestions,
             runId,
+            lastRunTimestamp,
             setRawSuggestions: (s) => { rawSuggestions = s; }
           }
         );

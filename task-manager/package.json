@@ -9,11 +9,12 @@
     "server": "tsx task-server/index.ts",
     "server:watch": "tsx watch task-server/index.ts",
     "client": "tsx task-manager.ts",
-    "start": "tsx orchestrator.ts",
+    "start": "concurrently -n api,orch -c cyan,yellow \"tsx api-server/index.ts\" \"tsx orchestrator.ts\"",
     "gmail-agent": "tsx gmail-server/gmail-agent/index.ts",
     "gmail-server": "tsx gmail-server/index.ts",
     "orchestrator": "tsx orchestrator.ts",
-    "filters": "tsx filter-cli.ts"
+    "filters": "tsx filter-cli.ts",
+    "api-server": "tsx api-server/index.ts"
   },
   "keywords": [
     "task-manager",
@@ -32,11 +33,14 @@
     "dotenv": "^17.4.2",
     "googleapis": "^172.0.0",
     "node-cron": "^4.2.1",
+    "ws": "^8.18.0",
     "zod": "^4.0.0"
   },
   "devDependencies": {
     "@types/node": "^20.14.2",
     "@types/node-cron": "^3.0.11",
+    "@types/ws": "^8.5.14",
+    "concurrently": "^10.0.1",
     "tsx": "^4.16.5",
     "typescript": "^5.5.4"
   }

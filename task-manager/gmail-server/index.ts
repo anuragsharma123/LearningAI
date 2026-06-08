@@ -39,11 +39,16 @@ server.registerTool(
       memory_context: z
         .string()
         .optional()
-        .describe("Known recurring patterns from previous runs, injected by the orchestrator.")
+        .describe("Known recurring patterns from previous runs, injected by the orchestrator."),
+      since_date: z
+        .string()
+        .optional()
+        .describe("ISO 8601 timestamp — fetch recurring emails from this date to now. Omit on first run (defaults to last 2 months).")
     })
   },
-  async ({ memory_context = "" }) => {
-    const suggestions: TaskSuggestion[] = await analyzeGmail(memory_context);
+  async ({ memory_context = "", since_date }) => {
+    const sinceDate = since_date ? new Date(since_date) : undefined;
+    const suggestions: TaskSuggestion[] = await analyzeGmail(memory_context, sinceDate);
     return {
       content: [{ type: "text", text: JSON.stringify(suggestions, null, 2) }]
     };

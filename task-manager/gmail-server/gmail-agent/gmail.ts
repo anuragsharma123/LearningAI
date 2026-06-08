@@ -256,20 +256,25 @@ export async function getTodayEmails(auth: OAuth2Client): Promise<EmailSummary[]
 }
 
 /**
- * Fetches up to 200 emails from the last two months for recurring-pattern analysis.
+ * Fetches up to 200 emails since the given date for recurring-pattern analysis.
+ * Falls back to the last two months when no date is provided (first run).
  * Uses `format: "metadata"` (headers + snippet, no body) to keep the payload
  * small and stay within Claude's context budget.
- * Limited to the primary inbox to filter out newsletters and promotions.
  *
- * @param auth - Authenticated OAuth2 client from {@link getAuthClient}.
- * @returns Array of recent {@link EmailSummary} objects with empty `body` fields.
+ * @param auth  - Authenticated OAuth2 client from {@link getAuthClient}.
+ * @param since - Start of the fetch window. Defaults to 2 months ago.
+ * @returns Array of {@link EmailSummary} objects with empty `body` fields.
  */
-export async function getLastTwoMonthsEmails(auth: OAuth2Client): Promise<EmailSummary[]> {
+export async function getEmailsSince(auth: OAuth2Client, since?: Date): Promise<EmailSummary[]> {
   const gmail = google.gmail({ version: "v1", auth });
 
-  const twoMonthsAgo = new Date();
-  twoMonthsAgo.setMonth(twoMonthsAgo.getMonth() - 2);
-  const after = Math.floor(twoMonthsAgo.getTime() / 1000);
+  const from = since ?? (() => {
+    const d = new Date();
+    d.setMonth(d.getMonth() - 2);
+    return d;
+  })();
+
+  const after = Math.floor(from.getTime() / 1000);
 
   const listResponse = await gmail.users.messages.list({
     userId: "me",
