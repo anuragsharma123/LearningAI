@@ -1,0 +1,21 @@
+{
+  "name": "learning-langchart",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "npx tsx --env-file=.env src/index.ts"
+  },
+  "dependencies": {
+    "@langchain/anthropic": "^1.4.1",
+    "@langchain/core": "^1.1.48",
+    "@langchain/langgraph": "^1.4.2",
+    "deepagents": "^1.10.2",
+    "dotenv": "^17.4.2",
+    "langchain": "^1.4.4",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.2",
+    "tsx": "^4.22.4"
+  }
+}
