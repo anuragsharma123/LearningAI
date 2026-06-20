@@ -11,6 +11,6 @@ Answer the user's question using **only the data already gathered** — do not s
 - If the user asks for cheaper flights → scan the flight data and highlight the most affordable options with details
 - If the user asks about family-friendly hotels or activities → filter from existing results
 - If the user asks "what if we stay longer / shorter" → use existing data to estimate cost differences
-- If the user asks something completely outside the existing data (e.g. a different destination) → politely say so and suggest starting a new session
+- If the user asks something completely outside the existing data (e.g. a different destination) → politely say so and let them know they can just describe the new trip naturally and it will be handled automatically
 - Keep answers concise, structured, and actionable
 - Always reference the original plan's data rather than making things up
