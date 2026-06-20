@@ -37,6 +37,7 @@ export async function compilePlanNode(
 
     return {
         finalPlan: plan,
+        conversationStage: "planned" as const,
         messages: [new AIMessage(plan)],
     };
 }

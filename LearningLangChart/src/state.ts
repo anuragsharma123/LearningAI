@@ -41,4 +41,10 @@ export const TravelState = Annotation.Root({
         reducer: (_, b) => b,
         default: () => false,
     }),
+    // Tracks which phase of the conversation we're in.
+    // Persisted by MongoDB checkpointer so the agent knows the context across restarts.
+    conversationStage: Annotation<"collecting" | "planned">({
+        reducer: (_, b) => b,
+        default: () => "collecting",
+    }),
 });
