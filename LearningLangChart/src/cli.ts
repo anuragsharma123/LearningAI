@@ -1,6 +1,6 @@
 import readline from "node:readline";
 import { HumanMessage } from "@langchain/core/messages";
-import { travelAgent } from "./travelAgent.js";
+import { travelAgent, memoryStore } from "./travelAgent.js";
 import { startMongo, stopMongo, savePlanEntry } from "./db.js";
 import { startSpinner, stopSpinner } from "./utils/ui.js";
 import {
@@ -27,6 +27,7 @@ function ask(prompt: string): Promise<string> {
 
 export async function main(): Promise<void> {
     await startMongo();
+    await memoryStore.start();
     await initRegistry();
 
     console.log("=== Travel Planning Agent ===");
@@ -99,6 +100,7 @@ export async function main(): Promise<void> {
         switch (decision.action) {
             case "exit":
                 rl.close();
+                await memoryStore.stop();
                 await stopMongo();
                 console.log("\nSession ended. Your plans are saved — run 'npm start' to continue.\n");
                 return;
