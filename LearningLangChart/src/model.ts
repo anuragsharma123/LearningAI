@@ -18,7 +18,7 @@ import { initChatModel } from "langchain";
 export const model = await initChatModel("claude-sonnet-4-6", {
     temperature: 0.3,
     timeout: 300,
-    maxTokens: 25_000,
+    maxTokens: 7_000,
     streaming: true,
 });
 
@@ -31,7 +31,7 @@ export const model = await initChatModel("claude-sonnet-4-6", {
  * - maxTokens 2000   → extraction responses are short JSON objects, no need for 25k tokens.
  * - timeout 60s      → short tasks should finish fast; fail loudly if they don't.
  */
-export const extractionModel = await initChatModel("claude-sonnet-4-6", {
+export const extractionModel = await initChatModel("claude-haiku-4-5-20251001", {
     temperature: 0,
     timeout: 60,
     maxTokens: 2_000,

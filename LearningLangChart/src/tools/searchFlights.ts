@@ -1,6 +1,7 @@
 import { tool } from "langchain";
 import * as z from "zod";
 import fetchTextFromUrl from "./fetchTextFromUrl.js";
+import { stripHtml } from "../utils/stripHtml.js";
 
 // Standard flight filters applied via the search URL:
 //   - Max 1 stop (stops=1)
@@ -29,10 +30,12 @@ const searchFlights = tool(
             );
         }
 
+        const text = stripHtml(result);
+
         return (
             `Flight search results for ${origin} → ${destination} ` +
             `(${startDate}–${returnDate}, ${memberCount} traveler(s)):\n\n` +
-            result
+            text
         );
     },
     {

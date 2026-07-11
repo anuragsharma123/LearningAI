@@ -1,6 +1,7 @@
 import { tool } from "langchain";
 import * as z from "zod";
 import fetchTextFromUrl from "./fetchTextFromUrl.js";
+import { stripHtml } from "../utils/stripHtml.js";
 
 // Standard hotel filters applied via the search URL:
 //   - Min 3-star rating
@@ -37,10 +38,12 @@ const searchHotels = tool(
             );
         }
 
+        const text = stripHtml(result);
+
         return (
             `Hotel search results for ${destination} ` +
             `(${checkIn} to ${checkOut}, ${memberCount} guest(s)):\n\n` +
-            result
+            text
         );
     },
     {
