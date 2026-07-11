@@ -1,0 +1,42 @@
+[
+  {
+    "id": "71b8c408-3c13-4ad5-bfcd-8bf7029f9a38",
+    "title": "Pay AT&T wireless bill – $131.15",
+    "description": "Monthly wireless bill for account 436210990662. Payment due: 06/06/2026. Bill received May 21, 2026.",
+    "status": "todo",
+    "createdAt": "2026-05-31T04:53:08.416Z",
+    "updatedAt": "2026-05-31T04:53:08.419Z"
+  },
+  {
+    "id": "58fde451-b98d-48e3-949f-f93ba42f4f56",
+    "title": "Pay HPSEBL electricity bill – check latest amount due",
+    "description": "Monthly electricity bill (Contract Account 200000465060). Bills received in April and May 2026. Last known due date was 05/25/2026 — a new bill is likely due soon. Check ebill@hpseb.in for the latest bill.",
+    "status": "todo",
+    "createdAt": "2026-05-31T04:53:08.424Z",
+    "updatedAt": "2026-05-31T04:53:08.424Z"
+  },
+  {
+    "id": "c9436f33-a6cd-4581-8ad3-d1181f75aec1",
+    "title": "Fix Vi Postpaid AutoPay failure – Rs. 532.17 (Kotak Bank)",
+    "description": "Kotak Bank AutoPay for Vi Postpaid (Rs. 532.17) failed in both April and May 2026 due to \"Card No. does not Exist.\" The card on file needs to be updated to avoid continued payment failures. Pay manually if needed.",
+    "status": "todo",
+    "createdAt": "2026-05-31T04:53:08.431Z",
+    "updatedAt": "2026-05-31T04:53:08.431Z"
+  },
+  {
+    "id": "fbb90ca7-113d-4ea5-b28d-3d08f58e722b",
+    "title": "Register for Rage Summer Academy – starts in 2 days (June 1)",
+    "description": "Rage Summer Academy begins June 1, 2026. Registration still open per email from Rage Volleyball Club.",
+    "status": "todo",
+    "createdAt": "2026-05-31T05:31:28.955Z",
+    "updatedAt": "2026-05-31T05:31:28.958Z"
+  },
+  {
+    "id": "b4ea6716-efee-4072-805d-3909d1f69c62",
+    "title": "Attend KrSh Parent Training – Wed Jun 3, 10:00–11:00 AM",
+    "description": "Google Meet session invited by Mayra Ramirez (mayra@sentrylivingsolutions.org) on June 3, 2026, 10:00–11:00 AM PDT.",
+    "status": "todo",
+    "createdAt": "2026-05-31T05:31:29.009Z",
+    "updatedAt": "2026-05-31T05:31:29.009Z"
+  }
+]
