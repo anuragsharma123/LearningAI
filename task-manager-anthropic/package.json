@@ -1,0 +1,17 @@
+{
+  "name": "task-manager-anthropic",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "npx tsx --env-file=.env src/index.ts"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.36.3",
+    "dotenv": "^17.4.2",
+    "mongodb": "^7.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.2",
+    "tsx": "^4.22.4"
+  }
+}
