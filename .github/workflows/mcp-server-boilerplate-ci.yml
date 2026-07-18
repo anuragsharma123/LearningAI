@@ -1,0 +1,40 @@
+name: MCP Server Boilerplate CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "boilerplate-mcpServers/**"
+      - ".github/workflows/mcp-server-boilerplate-ci.yml"
+  pull_request:
+    paths:
+      - "boilerplate-mcpServers/**"
+      - ".github/workflows/mcp-server-boilerplate-ci.yml"
+
+defaults:
+  run:
+    working-directory: boilerplate-mcpServers
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: boilerplate-mcpServers/package-lock.json
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Build
+        run: npm run build
