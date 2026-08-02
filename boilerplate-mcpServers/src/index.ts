@@ -18,6 +18,7 @@ for (const tool of tools) {
 async function main() {
   const transport = new StdioServerTransport();
   await server.connect(transport);
+  console.error(`MCP server ready (${tools.length} tools registered)`);
 }
 
 main().catch((error) => {
