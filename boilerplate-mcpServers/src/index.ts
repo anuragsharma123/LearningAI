@@ -8,7 +8,11 @@ const server = new McpServer({
 });
 
 for (const tool of tools) {
-  server.tool(tool.name, tool.description, tool.inputSchema, tool.handler);
+  server.registerTool(
+    tool.name,
+    { description: tool.description, inputSchema: tool.inputSchema },
+    tool.handler
+  );
 }
 
 async function main() {
