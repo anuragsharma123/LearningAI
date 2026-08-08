@@ -9,9 +9,10 @@
     "dev": "tsx src/index.ts",
     "build": "tsc -p tsconfig.json",
     "start": "node dist/index.js",
-    "typecheck": "tsc --noEmit",
-    "lint": "eslint src --ext .ts",
-    "inspector": "npx @modelcontextprotocol/inspector tsx src/index.ts"
+    "typecheck": "tsc --noEmit && tsc --noEmit -p scripts/tsconfig.json",
+    "lint": "eslint src scripts --ext .ts",
+    "inspector": "npx @modelcontextprotocol/inspector tsx src/index.ts",
+    "scaffold": "tsx scripts/scaffold.ts"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.12.0",
