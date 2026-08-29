@@ -92,60 +92,28 @@ file directly.
 
 ## Approving an action (`block_card` / `escalate_case`)
 
-Recommending an irreversible action and *executing* it are deliberately
-separate. The supervisor / sweep only ever recommends and records a
-verdict -- it can never block a card or escalate a case itself, so a sweep of
-276 accounts never needs a human standing by.
+**What this proves:** the system can never block a card or escalate a case
+on its own. Every irreversible action stops and waits for a yes/no from a
+human, and the run finishes correctly either way -- approved actions really
+execute, rejected ones don't, and rejecting isn't a dead end (the agent
+produces a normal final result either way, not an error).
 
-**Single-case runs (`npm run dev -- <accountId>`) handle this for you** --
-see above. What follows is what that prompt is doing under the hood, useful
-if you're approving a recommendation that came out of a sweep instead, where
-nothing prompts automatically since no human is watching a sweep run.
+Single-case runs (`npm run dev -- <accountId>`) ask you automatically: if
+the verdict recommends an action, you'll see `Approve? [y/N]` right there.
 
-**The mechanism, independent of language:** Disposition is a LangGraph agent.
-When it's about to call a tool that's marked as needing approval, LangGraph
-*pauses the entire agent mid-run* -- not a blocking prompt inside one
-function call, but the whole graph's execution state is checkpointed and
-control returns to whoever is running it, carrying a description of exactly
-what the agent wants to do and why. Nothing happens until that run is
-resumed with an explicit decision: approve, or reject with a reason. If you
-know LangGraph's Python SDK, this is the exact same `interrupt()` /
-`Command(resume=...)` pattern (`langgraph.types.interrupt`) -- the JS API
-here is a direct mirror of it, just with `await` instead of Python's
-generator-based checkpointing. Two things enforce this:
+Sweeps don't ask -- 276 accounts can't wait on a human -- so a recommendation
+from a sweep is approved separately, after the fact:
 
-1. `humanInTheLoopMiddleware` is configured (in `disposition/agent.ts`) to
-   intercept exactly two tools -- `block_card` and `escalate_case` -- and
-   nothing else. Every other tool call goes through untouched.
-2. A checkpointer (`MemorySaver`) persists the paused state under a `threadId`,
-   so "resume" means "continue this exact run," not "start a new one."
+```ts
+const paused = await runDisposition(threadId, accountId, caseContext);
+// paused describes the pending action -- show it to a human
 
-Concretely, one run through this looks like:
+await resumeDisposition(threadId, { decisions: [{ type: "approve" }] });
+// or: { decisions: [{ type: "reject", message: "why not" }] }
+```
 
-- **Start a run.** Call the agent with an account id and case context. If it
-  decides an irreversible action is warranted, it stops there instead of
-  finishing -- the return value carries a description of the pending action
-  (e.g. *"Escalate case for account A00513? Reason: ..."*) instead of a
-  final verdict.
-- **Show that description to a human**, however your integration does that
-  -- a CLI prompt (this is what `npm run dev -- <accountId>` does for you
-  automatically), a Slack message, a review queue -- LangGraph doesn't care.
-- **Resume the same run with a decision.** Approve it, and the paused tool
-  call actually executes (the card really gets blocked, the case really
-  gets escalated) before the run produces its final verdict. Reject it with
-  a reason, and the run finishes without ever calling that tool -- the
-  rejection reason flows back into the agent's own final reasoning instead.
-
-The actual TypeScript, in `src/specialists/disposition/agent.ts` and driven
-by `src/index.ts`, is two functions built exactly on that shape:
-`runDisposition(threadId, accountId, caseContext)` starts (or restarts) a
-run and returns either a final result or a paused `__interrupt__` payload;
-`resumeDisposition(threadId, decision)` continues a paused run with
-`{ decisions: [{ type: "approve" }] }` or
-`{ decisions: [{ type: "reject", message: "..." }] }`.
-
-Executed actions land in `output/actions.json`; every verdict (approved,
-rejected, or no action needed) lands in `output/dispositions.json`.
+Approved actions land in `output/actions.json`. Every verdict, either way,
+lands in `output/dispositions.json`.
 
 ## Editing policy without touching code
 
