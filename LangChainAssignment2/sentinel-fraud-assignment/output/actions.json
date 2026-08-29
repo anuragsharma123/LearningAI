@@ -1,0 +1,23 @@
+[
+  {
+    "accountId": "A00513",
+    "action": "escalate_case",
+    "detail": {},
+    "reason": "Network specialist found this account's devices (DR001, DR002) are shared with 6 other distinct customers, and 15-27 other accounts show coincident high-risk money-transfer activity within 48h windows -- strongly suggestive of a coordinated fraud ring or device-farm operation. Combined with Behaviour's finding of a night-time burst of transactions far above baseline (up to 240x the p90), this warrants human investigation into the broader network of linked accounts, even though the immediate burst on this account appears to have concluded on 2026-02-27.",
+    "executedAt": "2026-08-29T04:33:47.121Z"
+  },
+  {
+    "accountId": "A00513",
+    "action": "escalate_case",
+    "detail": {},
+    "reason": "Verdict is fraud with high confidence. Most recent flagged activity (Mar 1 burst) occurred 2+ days ago with no evidence of ongoing transactions after 2026-03-02, so immediate card block is not required. However, this case exceeds escalation threshold: it involves a confirmed money-mule scheme across 6+ linked accounts with shared infrastructure (devices DR001/DR002), coordinated merchant targeting, and high financial volumes ($463k+ in initial burst). This network pattern requires human investigator time to map the full fraud ring, coordinate across related account investigations, and plan network-wide remediation. Escalation is appropriate because the complexity and scope cannot be resolved within standard single-account procedures.",
+    "executedAt": "2026-08-29T06:59:01.934Z"
+  },
+  {
+    "accountId": "A00513",
+    "action": "escalate_case",
+    "detail": {},
+    "reason": "Disposition escalates rather than blocking because: (1) Most recent flagged activity is 2026-03-01 (historical, outside 48-hour current exposure window required for block_card). (2) Case involves broader organized network pattern—shared devices DR001 and DR002 across 6 other unrelated customers with synchronized activation. 8 of 10 flagged transactions at high-risk money transfer merchants with 15–27 coincident accounts transacting within ±48 hours. This multi-account coordinated activity exceeds single-account disposition scope. (3) Human investigator must examine linked-account network, coordinate with related cases (C00638, C00619, C00594, C01039, C00779, C00925), and determine if devices remain active and what coordinated takedown action is warranted. Card block alone does not disrupt the organized operation.",
+    "executedAt": "2026-08-29T07:02:09.279Z"
+  }
+]

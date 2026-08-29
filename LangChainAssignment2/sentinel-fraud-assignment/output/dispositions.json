@@ -1,0 +1,758 @@
+[
+  {
+    "accountId": "A00985",
+    "verdict": "legitimate",
+    "confidence": "high",
+    "reasoning": "Behaviour flagged anomalous activity (4 transactions at 68x-144x baseline on new device DX01444), but Context provides a direct, verified explanation: case note N00080 confirms the customer upgraded phones on the 14th, went through staff-assisted re-registration, and was verified via video KYC on the same date as the flagged activity (2026-02-27). Network corroborates this is not an account takeover pattern -- the device is exclusive to this customer with no shared devices or merchant coincidences suggesting fraud rings or credential reuse. All three specialists align: the anomaly has a documented, KYC-verified legitimate cause, and there's no network signal indicating compromise.",
+    "recordedAt": "2026-08-29T04:32:02.827Z"
+  },
+  {
+    "accountId": "A00513",
+    "verdict": "fraud",
+    "confidence": "medium",
+    "reasoning": "Behaviour found a clear anomaly cluster: three night-time money-transfer transactions (₹47k-120k) far above the ₹498 p90 baseline within an 8-hour window, plus a new unrecognized device (DR002) used on one transaction -- consistent with a takeover/fraud ring pattern rather than normal usage. Network corroborates this strongly: both DR001 and DR002 are shared devices linked to multiple other customer accounts (4 and 2 respectively), and 15-27 other accounts show coincident activity at the same high-risk money-transfer merchants within 48h windows, indicating this account is part of a broader coordinated fraud pattern (e.g. device farm / mule network) rather than an isolated incident. Context found no prior notes or disputes, so there's no KYC-verified explanation or customer-confirmed legitimate reason for this activity, which does not contradict the fraud read -- it simply means this is undocumented until now. \n\nOn action: the burst of transactions occurred on 2026-02-27 and there is no indication in Behaviour or Network of activity after that date -- this reads as a completed historical burst rather than money actively still moving right now. Given the network linkage across many accounts, this is serious enough to warrant human investigative attention (potential ring), but blocking the card is not justified absent evidence of ongoing/active draining beyond the already-completed burst.",
+    "recordedAt": "2026-08-29T04:33:47.120Z"
+  },
+  {
+    "accountId": "A00513",
+    "verdict": "fraud",
+    "confidence": "medium",
+    "reasoning": "Behaviour flagged a burst of high-risk money-transfer transactions (₹47k-120k) occurring overnight (02:19-10:19), massively exceeding the account's p90 baseline of ₹498, plus use of a new, previously-unseen device (DR002) on one transaction -- classic signs of account takeover rather than organic spend. Network corroborates this strongly: both DR001 and DR002 are shared devices linked to multiple other customer accounts (4 and 2 respectively), and 15-27 other accounts show coincident activity at high-risk money-transfer merchants within the same 48h window, indicating this account is part of a broader fraud ring/device-sharing pattern rather than an isolated anomaly. Context found no prior notes or disputes, so there's no KYC-verified explanation or history to offset the behavioural and network signals -- absence of context is neutral here, not exculpatory, given the strength of the other two signals. The combination of severe behavioural deviation and cross-account device/merchant linkage supports a fraud verdict, though confidence is medium rather than high since Context provided no independent confirmation (e.g., no confirmed dispute or customer report) and there is no direct admission or block-listing evidence.",
+    "recordedAt": "2026-08-29T04:35:55.205Z"
+  },
+  {
+    "accountId": "A00985",
+    "verdict": "insufficient_evidence",
+    "confidence": "medium",
+    "reasoning": "Behaviour confirms a precedent-free, extreme burst of 4 transactions totaling $216,091.17 (80-144x baseline p90) on a brand-new device, with the account reverting to normal small-dollar behaviour immediately before and after -- a hallmark of either a one-off legitimate high-value event or a takeover. Context partially explains the device (KYC-verified phone upgrade support call ~5 hours before the burst) but explicitly does not address or justify the size/pattern of the transactions themselves -- no note, dispute, or prior fraud case covers the spending burst. Network's output was placeholder/test data and gave no substantive read on shared-device or cross-account risk, so it neither confirms nor rules out coordinated fraud. With device provenance explained but transaction behaviour unexplained, and the one specialist that could have tipped the balance (Network) returning inconclusive data, the evidence does not cleanly resolve to fraud or legitimate.",
+    "recordedAt": "2026-08-29T04:42:08.339Z"
+  },
+  {
+    "accountId": "A00985",
+    "verdict": "insufficient_evidence",
+    "confidence": "medium",
+    "reasoning": "Behaviour flags the four transactions as extreme outliers (80-400x baseline, unnatural exact-hourly cadence, device never seen before/after) which is strongly suspicious on its own. Context provides a legitimate, KYC-verified explanation for the new device itself (case note N00080 documents verified re-registration hours earlier), but explicitly does not cover or account for the high-value transaction burst that followed -- so the device's presence is explained, but the spending is not. Network found no shared-device links to other customers and no mule/cash-out channel merchants (grocery, ecommerce, travel, utilities rather than moneytransfer/crypto/giftcards), which argues against an organized takeover ring but does not rule out a legitimate-device compromise or first-party fraud. Given specialists partially conflict (device legitimacy vs. unexplained extreme spend, with network signal ambiguous rather than clearing or confirming), a forced binary verdict isn't warranted -- this is genuinely inconclusive pending human review of the transaction destinations/merchants themselves.",
+    "recordedAt": "2026-08-29T04:43:39.484Z"
+  },
+  {
+    "accountId": "A00985",
+    "verdict": "insufficient_evidence",
+    "confidence": "medium",
+    "reasoning": "Behaviour confirms a sustained extreme deviation: 4 app transactions totaling roughly 216091 dollars in 3 hours from an unlisted device DX01444, 80x to 145x the account p90 and far outside the historical channel mix which was mostly ecom and card present with only 27 percent app. Context explains the device legitimacy via a same day case note documenting a KYC verified re registration after a phone upgrade, but explicitly does not mention or account for the 216K dollar burst itself, and there are no disputes or prior fraud on file either way. Network found no ring linkage since devices are exclusive to the customer and merchants are low to moderate risk with coincidence likely benign, so there is no corroborating signal of external fraud but also nothing that affirmatively confirms the spend was customer authorized. The specialists findings point in different directions on whether the burst itself is legitimate or a takeover riding on the verified re registration, and none of them resolves it, so this is genuinely inconclusive.",
+    "recordedAt": "2026-08-29T04:48:15.939Z"
+  },
+  {
+    "accountId": "A00513",
+    "verdict": "fraud",
+    "confidence": "high",
+    "reasoning": "Convergent evidence across all three specialists points to active, ongoing mule and layering activity rather than a concluded historical incident. Behaviour flags a large night-time transaction of roughly seventy seven thousand dollars as sharply anomalous versus baseline. Context shows the customer's own explanation of forwarding money for a friend was explicitly rejected by staff as evasive and high risk, and that explanation does not cover the separate high risk merchant burst or the night-time high value transaction, meaning most suspicious activity remains unexplained. Network found two shared devices both onset the same date coinciding with the start of the fraud window, linking this account to six distinct other customers, which is statistically rare given only a small fraction of bank-wide devices are shared at all, combined with a cluster of large transactions at high risk money transfer merchants where a dozen or more other accounts transacted concurrently, consistent with coordinated layering or mule network activity. The prior confirmed fraud case adds risk history but is not directly explanatory of the current pattern. Because the transaction burst spans multiple days into the recent past and the device links and merchant clustering suggest exposure may still be active, this is not a concluded historical event, warranting human review before any irreversible action is taken.",
+    "recordedAt": "2026-08-29T04:58:41.421Z"
+  },
+  {
+    "accountId": "A00638",
+    "verdict": "fraud",
+    "confidence": "high",
+    "reasoning": "Test",
+    "recordedAt": "2026-08-29T05:04:28.569Z"
+  },
+  {
+    "accountId": "A00090",
+    "verdict": "legitimate",
+    "confidence": "high",
+    "reasoning": "Behaviour confirms the transaction is a statistical outlier but flags that the new device trigger was erroneous since D000900 has been the sole device since Nov 2025. Context provides strong specific pre event corroboration via case note N00205 from a branch visit the day before, where the customer stated intent to buy jewellery for roughly 79760 for a wedding this week, matching the transaction amount almost exactly, with staff pre-warning the customer about a possible OTP flag. Network shows the device is exclusive to this account and not part of any shared device fraud ring, with merchant overlap unremarkable given low risk score and no anomalous clustering. All three specialists converge on this being anomalous but specifically pre explained with no device sharing or network risk signal.",
+    "recordedAt": "2026-08-29T05:06:35.132Z"
+  },
+  {
+    "accountId": "A00307",
+    "verdict": "insufficient_evidence",
+    "confidence": "medium",
+    "reasoning": "Context provides strong, closely-matching pre-authorization (customer pre-notified staff on 2026-02-25 of a ~181,500 laptop purchase, and staff confirmed limit sufficiency) which substantially explains the amount anomaly Behaviour flagged (~310x p90). Behaviour also correctly notes the device is known (D003070), so the 'new device' alert (AL0375) is a false trigger. However, Behaviour identifies two anomalies the customer's note does not address: use of card K003071, which has never appeared in 61 prior transactions (baseline card K003070), and the 01:33 night-time timing with zero prior night-time transactions. Network shows no ring/mule/takeover signals and no device sharing, which argues against organized fraud but does not resolve the card/timing discrepancy on its own -- it merely fails to corroborate fraud, it does not affirmatively explain the anomalies. Given one strong legitimacy signal (amount pre-authorization) coexists with two material unexplained anomalies (unfamiliar card, unusual timing) that no specialist could account for, this is a genuinely mixed, inconclusive picture rather than a clean fraud or legitimate call.",
+    "recordedAt": "2026-08-29T05:07:38.799Z"
+  },
+  {
+    "accountId": "A00513",
+    "verdict": "fraud",
+    "confidence": "high",
+    "reasoning": "test",
+    "recordedAt": "2026-08-29T05:14:15.659Z"
+  },
+  {
+    "accountId": "A00513",
+    "verdict": "fraud",
+    "confidence": "high",
+    "reasoning": "Behaviour flags card K005130 with R05 (high-risk merchant burst) and R07 (night-time high-value) money-transfer transactions of ₹47k-120k, far above the customer's p90 baseline of ₹498, plus use of a new, non-baseline device DR002 -- a strong anomaly signature. Network corroborates this is not an isolated incident: DR001 is shared across 4 other customers and DR002 across 2 others, and 15-27 other accounts were coincident at the same high-risk money-transfer merchants within 48h windows, consistent with a coordinated fraud ring rather than a one-off. Critically, Network notes the most recent burst was only 2 days ago, indicating the exposure is current/ongoing, not a concluded historical incident. Context shows no prior disputes or case notes, but this absence doesn't contradict the behavioural/network evidence -- it simply means the customer hasn't yet reported it. Combined, Behaviour and Network agree and point to active, high-confidence fraud with recent (within 48h) activity, meeting the policy bar for block_card: verdict fraud + high confidence, exposure current (burst 2 days ago, nothing indicating it has stopped), and no indication the card is already blocked/closed.",
+    "recordedAt": "2026-08-29T05:15:16.185Z"
+  },
+  {
+    "accountId": "A00513",
+    "verdict": "fraud",
+    "confidence": "high",
+    "reasoning": "Card K005130 shows R05 high-risk merchant burst and R07 night-time high-value money-transfer transactions of 47k-120k rupees between 02:19-10:19 on 2026-02-27, far above p90 baseline of 498 rupees, with one transaction on new device DR002. Network shows DR001 shared across 4 customers, DR002 across 2 others, plus 15-27 coincident accounts at same high-risk merchants within 48h, most recent burst 2 days ago, indicating a coordinated pattern rather than isolated activity. Context shows no prior disputes on file.",
+    "recordedAt": "2026-08-29T05:16:21.239Z"
+  },
+  {
+    "accountId": "A00090",
+    "verdict": "legitimate",
+    "confidence": "high",
+    "reasoning": "Behaviour flags the transaction as a severe statistical outlier (255x p90, 752x mean, night window normally only 1.7% of activity) but explicitly confirms the \"new device\" alert is a false positive -- D000900 is the same device used consistently across all 59 prior transactions since 2020, so device risk is a non-issue. The amount/timing anomaly is directly explained by Context's case note N00205: one day prior, in an in-branch visit, the customer told staff in person they intended to buy ~$79,760 of jewellery for a wedding, and staff pre-warned them about a likely flag and to keep their phone available for OTP. The transaction matches this note precisely in amount, timing, and merchant category (Jewellery 430), and there are no prior disputes or fraud cases on file. Network confirms the device is exclusive to this customer (no cross-account sharing) and that the merchant's co-occurrence with 9 other accounts is unremarkable given its low risk score (0.04), ruling out a ring/takeover pattern. All three specialists' evidence converges on a single coherent legitimate explanation with no contradictions.",
+    "recordedAt": "2026-08-29T05:21:47.315Z"
+  },
+  {
+    "accountId": "A00638",
+    "verdict": "fraud",
+    "confidence": "medium",
+    "reasoning": "test",
+    "recordedAt": "2026-08-29T05:22:57.561Z"
+  },
+  {
+    "accountId": "A00090",
+    "verdict": "legitimate",
+    "confidence": "high",
+    "reasoning": "Behaviour flags amount (255x p90) and night timing as anomalous but confirms device D000900 is the same device used in all 59 prior baseline transactions, invalidating the \"new device\" rule trigger entirely. Context provides a case note (N00205) from an in-branch visit the day before, where the customer pre-notified staff of an intended ~$79,760 jewellery purchase for a wedding, and staff explicitly warned about a possible fraud alert and OTP need -- this matches both the amount and approximate timing of T0107809 closely. Network confirms the device has never been shared with any other account (no compromise/mule indicators) and while the merchant has 9 coincident accounts, its risk score is very low (0.04) with no ring or linkage signals. All three specialists converge: the sole anomalous signal (amount/timing) is fully and specifically explained by the pre-notification, and there is no corroborating evidence of compromise from either the device or network dimension.",
+    "recordedAt": "2026-08-29T05:23:03.651Z"
+  },
+  {
+    "accountId": "A00513",
+    "verdict": "fraud",
+    "confidence": "high",
+    "reasoning": "Behaviour: a burst of 6 transactions (2026-02-27T02:19 to 2026-03-01T03:11) at 96x-240x baseline p90 ($498.69) with several in a 00:00-06:00 window where the account has 0% historical overnight activity, and two transactions (T0107966, T0107965) used devices DR001/DR002 never seen on this account (only D005130 known) — compounding, individually-anomalous flags. Context: case note N00017 records the customer admitting to receiving/forwarding money for a \"friend,\" a mule-pattern admission staff already flagged high-risk, with no dispute filed and no legitimate explanation on record; prior case PC0082 (Oct 2025) confirms this account was compromised before, showing recurrence risk. Network: DR001 and DR002 are both shared devices (with 4 and 2 other customers respectively, active in the same window) versus only 16/1,520 shared devices bank-wide, and 17-27 other accounts transacted at the same high-risk money-transfer/gift-card merchants within 48 hours of this account's activity versus ~6 at a control merchant — a pattern consistent with a coordinated mule/layering ring rather than isolated fraud. All three specialists converge on the same conclusion with no contradicting evidence, supporting high-confidence fraud verdict.\n\nPer policy, block_card requires high-confidence fraud AND concrete evidence the exposure is current/ongoing. The burst extends to 2026-03-01T03:11, and there is no indication in Context or Network that the activity has stopped, been closed, or that the card is already blocked -- no dispute filed, no closure note. This is within the recency window the policy requires, so the exposure appears current rather than a concluded one-off incident.",
+    "recordedAt": "2026-08-29T05:24:45.799Z"
+  },
+  {
+    "accountId": "A00090",
+    "verdict": "legitimate",
+    "confidence": "high",
+    "reasoning": "Test",
+    "recordedAt": "2026-08-29T05:24:56.961Z"
+  },
+  {
+    "accountId": "A00307",
+    "verdict": "insufficient_evidence",
+    "confidence": "medium",
+    "reasoning": "Behaviour confirms a strong statistical anomaly (about 310x p90 baseline) but the two flagged dimensions split. The value anomaly is explained by Context's 2026-02-25 case note where the customer pre-notified staff of an approximately 181500 dollar laptop purchase and staff confirmed sufficient limit, closely matching the trigger amount. However two elements remain unexplained by any customer communication: use of a new card K003071 never seen in 61 prior baseline transactions where all prior activity used K003070, and execution at 01:33 in a night window with zero historical night time activity. Device D003070 did match baseline, partially offsetting device level risk. Network found no shared device links and the coincident merchant Electronics 638 with risk score 0.32 and 18 other accounts is low or moderate risk and consistent with normal retail traffic, no collusion or fraud ring signal. The pre authorization covers intent and amount but not the specific card or timing, and no specialist supplies a clear account takeover or fraud ring signal, so the evidence is mixed rather than clearly fraudulent or clearly legitimate.",
+    "recordedAt": "2026-08-29T05:25:00.643Z"
+  },
+  {
+    "accountId": "A00719",
+    "verdict": "fraud",
+    "confidence": "high",
+    "reasoning": "Behaviour flags a burst of 5 transactions (T0106940-T0106944, 01:56-02:32 on 2026-02-27, ~346281 total) each 133x-209x the account's p90 baseline of 380.42, from a never-before-seen device DX01431 versus baseline device D007190, spanning 5 countries MY GB NL SG AE within 36 minutes at 9-minute intervals. This matches all 4 triggered alerts: new device high value, velocity spike, impossible travel, night-time high value, versus a 94.2 percent India baseline. Context corroborates strongly: customer explicitly denies making any of these transactions, states no password change, confirms last legitimate use was a grocery purchase on the 26th, and there is no travel notice or device-upgrade record explaining the new device or multi-country burst. A related dispute DP0022 describing a stolen phone and unauthorized account use, though tied to a different transaction, reinforces an account-takeover narrative. Network found no shared-device ring linkage for either device, but flagged moderately notable coincident crypto-exchange activity risk scores 0.73 and 0.57 consistent with cash-out behavior typical of takeover. Combined this is a coherent corroborated account-takeover pattern meeting high-confidence fraud.\n\nPer policy though, block_card requires concrete evidence the exposure is current and ongoing. The flagged burst concluded at 02:32 on 2026-02-27 and the customer already called in to report it per case note N00031, with no signal transactions are continuing or that the device session remains active. This is a concluded incident already reported by the victim, not a live ongoing exposure, so the block_card bar is not met despite high confidence fraud. The case does warrant human investigator time given Network's crypto cash-out coincidence and the unresolved link to dispute DP0022, which is exactly the broader linked-account network pattern the policy calls out for escalation.",
+    "recordedAt": "2026-08-29T05:25:03.530Z"
+  },
+  {
+    "accountId": "A00638",
+    "verdict": "fraud",
+    "confidence": "high",
+    "reasoning": "Behaviour shows extreme deviation from a stable baseline (139 txns, mean $219, p90 $517.83): a lone $157,512.89 night transaction on a never-before-seen device DR001 (304x p90), plus a 5-txn burst totaling $544,454.93 on the known device D006380, each 135x-309x p90 and spaced exactly 2 hours apart -- both patterns inconsistent with organic spending and consistent with account takeover/mule cash-out. Context corroborates this: the customer admitted in case note N00004 to receiving and forwarding money for a 'friend,' a classic mule pattern, was evasive, and could not explain the new device or the large amounts -- staff already flagged this as high risk. Network evidence confirms coordination rather than an isolated incident: DR001 is one of only 16 shared devices bank-wide and is shared with 4 other customers all active in the same alert window, and transactions show 15-27 coincident accounts at high-risk money-transfer merchants versus 2-18 at the account's normal merchants, indicating a fraud ring using this account as a mule conduit. All three specialists align (Behaviour, Context, Network), supporting high confidence in a fraud verdict.\n\nPer policy, block_card requires high-confidence fraud AND concrete evidence the exposure is current/ongoing, not historical. The alert burst (T0107961 and the T0106692-96 burst) occurred 2026-03-01, and the case note is dated 2026-03-02 -- within the last 48 hours of the account's most recent activity, with no indication in Context or Network that the exposure has stopped (no dispute filed, no prior case closed, no confirmation the mule pipeline concluded). The customer's evasive admission signals the mule arrangement may still be active. This satisfies the policy's requirement for current, ongoing exposure, and there's no indication the card/account is already blocked or closed.",
+    "recordedAt": "2026-08-29T05:25:08.529Z"
+  },
+  {
+    "accountId": "A00985",
+    "verdict": "insufficient_evidence",
+    "confidence": "medium",
+    "reasoning": "Behaviour confirms an extreme, statistically anomalous burst: 4 transactions totaling $216,091.17 in 3 hours from a brand-new device DX01444, each 80x-144x the account's baseline p90 ($459.62), against 78 prior txns that were all low-value and domestic. Context surfaces a legitimate, KYC-verified explanation for the device itself (same-day phone upgrade re-registration, note N00080), but that note only covers the device change -- it does not address or justify the subsequent $216k spend burst hours later, and no dispute or note speaks to the transaction pattern. Network finds no red flags that would confirm fraud (device not shared with other accounts/no ring linkage) but also nothing that affirmatively clears the transactions (low-risk merchants alone don't explain the magnitude/velocity given the customer's history). This is a genuine split: the device is explained, the extreme spend is not, and network data is neutral rather than corroborating either side. Per policy, this warrants insufficient_evidence rather than forcing fraud/legitimate.",
+    "recordedAt": "2026-08-29T05:25:12.377Z"
+  },
+  {
+    "accountId": "A01045",
+    "verdict": "legitimate",
+    "confidence": "high",
+    "reasoning": "Behaviour confirms the transaction is a statistical outlier on amount (263.8x p90 baseline) and timing (2.7% night-window base rate), but also establishes the \"new device\" trigger on AL0359 is a false signal since D010450 is the account's sole known device. Context surfaces case note N00218 from the day before, showing the customer pre-notified support of an approximately $185,720 laptop purchase for their daughter's course and staff confirmed sufficient limit -- the amount matches the flagged transaction almost exactly, indicating customer-initiated, pre-announced activity. Network confirms the device is isolated (no cross-customer sharing), the merchant is a mainstream Electronics retailer with unremarkable coincidence (0.32 risk, 18 coincident accounts, consistent with legitimate retail traffic), and there is no linkage to other suspicious accounts. All three specialists converge: the amount/timing anomaly is real but fully explained by legitimate, pre-notified customer behavior, with no network or device risk indicators supporting fraud.",
+    "recordedAt": "2026-08-29T05:26:14.251Z"
+  },
+  {
+    "accountId": "A00121",
+    "verdict": "fraud",
+    "confidence": "high",
+    "reasoning": "Behaviour confirms 5 transactions totaling ~376,015, each 92x-123x p90 baseline of 705.99, from a never-before-seen device (DX01442 vs known D001210), with impossible-travel IP cycling SG-MY-TH-AE-US every ~9 minutes, all inside a 03:00-04:00 window rarely used historically (4.4 percent baseline night fraction). Context adds a same-day customer report affirmatively denying the device registration and denying travel while confirming physical card possession, ruling out benign explanations and corroborating account takeover. Network found no device-sharing ring, but flagged classic cash-out vectors (gift cards, crypto exchanges) consistent with takeover monetization. All three specialists align on anomalous, unexplained activity.",
+    "recordedAt": "2026-08-29T05:26:36.880Z"
+  },
+  {
+    "accountId": "A00333",
+    "verdict": "fraud",
+    "confidence": "high",
+    "reasoning": "Behaviour flags a sharp multi-signal deviation: three transactions ($33.5K/$41.3K/$33.1K) within an 18-minute window at 03:30-03:48, each 78-97x the account's p90 baseline ($425.89), from an entirely new device (DX01440) never seen before (baseline D003330), during a time window with 0% historical night activity, with impossible travel (IP AE->TH in 9 minutes). This is inconsistent with the account's normal pattern of small (~$206 avg) card_present/ecom/app transactions in India. Context corroborates account takeover, not legitimate activity: case note N00053 confirms the customer denies performing the device registration, denies travel, and still physically holds the card; dispute DP0037 confirms no OTP was received and the customer believes someone else has account access. Network found no shared device linkage or ring pattern -- an isolated single-account takeover, not evidence against fraud, just against a broader network angle. However, per policy, block_card requires concrete evidence the exposure is current, not historical. Here the flagged burst occurred on 2026-02-27 and concluded (three transactions within an 18-minute window), and the customer already self-reported it as unauthorized via case note and a formal dispute filed 2026-03-02 -- indicating the incident has already been detected/reported, with no signal of continued or ongoing unauthorized activity since.",
+    "recordedAt": "2026-08-29T05:26:44.572Z"
+  },
+  {
+    "accountId": "A00673",
+    "verdict": "fraud",
+    "confidence": "high",
+    "reasoning": "Behaviour flagged a clearly anomalous burst including a new device, a high value transaction, a velocity spike above six authorizations in sixty minutes, impossible travel, and a night time high value transaction above forty thousand, all inconsistent with the account's normal pattern. Context corroborates this is not a benign explanation since the customer called in distress, filed formal dispute DP0025, explicitly denied making any of the transactions or changing the password, reported the phone stolen, and confirmed last legitimate use was the 26th at a grocery store, which is a direct account takeover claim rather than a travel notice or device upgrade acknowledgment. Network adds that several burst transactions hit high risk giftcard and crypto merchants with abnormally high coincident account counts of 16, 15, and 9 versus a baseline near 10, consistent with a cash out ring, even though no direct shared device link was found. All three specialists converge on anomalous behavior, customer confirmed non authorization, and network level cash out signatures, which is sufficient for a high confidence fraud verdict.",
+    "recordedAt": "2026-08-29T05:26:58.807Z"
+  },
+  {
+    "accountId": "A00253",
+    "verdict": "fraud",
+    "confidence": "high",
+    "reasoning": "Behaviour shows five 50,000 transactions in a night window where the baseline night-transaction fraction is only 2.4 percent, each roughly 120x the account p90 baseline of 417.58, cumulative 150k to 250k within hours: a decisive outlier not marginal. Context shows the only note on file predates the burst by 6 days, only generically references travel and supplier deposits, and does not mention night activity, money-transfer merchants, or this specific 50k times five burst; there is no prior dispute or fraud history suggesting this is tolerated. Network shows each of the five transactions hit a distinct high-risk money-transfer merchant with risk scores 0.56 to 0.82, each coinciding with 11 to 19 other accounts transacting at the same merchant in the same window, consistent with a coordinated mule or ring cash-out pattern, contrasted against unremarkable overlap at low-risk merchants. Device is known with no new-device signal, ruling out a stolen-device angle, but the amount, timing, and merchant-network convergence together are decisive. All three specialists align with no contradicting signal, and the alert timestamp marks the trigger for the final transaction of the burst, indicating the exposure is current with no customer report or sign the pattern has already stopped.",
+    "recordedAt": "2026-08-29T05:27:06.475Z"
+  },
+  {
+    "accountId": "A00340",
+    "verdict": "fraud",
+    "confidence": "high",
+    "reasoning": "Behaviour shows every dimension breaking sharply from A00340's established pattern on 2026-02-27 03:15-04:00: six transactions at 79x-200x the p90 baseline, from a brand-new device DX01437 versus the known device used in 89.9% of prior activity, impossible-travel geography cycling across three countries within minutes, and night-window timing rare in this account's history. Context corroborates via customer's explicit denial and formal dispute of unauthorized charges, with no travel notice or device-upgrade explanation. Network found no cross-account linkage but does not contradict fraud. Together this supports a high-confidence fraud verdict.",
+    "recordedAt": "2026-08-29T05:27:19.798Z"
+  },
+  {
+    "accountId": "A00513",
+    "verdict": "fraud",
+    "confidence": "high",
+    "reasoning": "Behaviour flags a night-time ~$77k outlier plus multi-day bursts (Feb 27-Mar 1, 2026) of high-risk crypto/gift-card/money-transfer activity, sharply inconsistent with account history. Context shows no legitimate justification: case note N00017 records the customer being evasive about the source of incoming transfers, offering a 'forwarding money for a friend' explanation that is a classic money-mule narrative, and there's a prior confirmed fraud case (PC0082, Oct 2025) on this same account/card. Network evidence is the strongest signal: the account shares two devices (DR001, DR002) with 6 other customers, both first seen 2026-01-21 and still active -- a highly anomalous pattern (only 16/1,520 bank-wide devices are ever shared) -- and this device-sharing window lines up exactly with the ~$70k-$120k high-risk-merchant transaction burst that had 14-27 other accounts coincidentally active at the same merchants. All three specialists converge on a coordinated money-mule/fraud-ring pattern with no competing explanation, supporting high confidence in a fraud verdict.",
+    "recordedAt": "2026-08-29T05:27:51.602Z"
+  },
+  {
+    "accountId": "A00464",
+    "verdict": "fraud",
+    "confidence": "high",
+    "reasoning": "Behaviour flags CLEAR-level (highest tier) anomaly: four txns on 2026-02-27 from a brand-new device (DX01494, baseline only ever saw D004640), in a country (Thailand) that represents just 1.7% of historical volume vs 91.5% India, at amounts 6.5x-9.8x baseline p90, with the first txn at 04:59:56 in a window with ~0% historical night activity, and 3 of 4 approved despite a normally low 3.4% decline rate. Context corroborates that this is unexplained: no travel notification, no case note or dispute referencing Thailand or the new device (the one case note, N00220, predates the incident and concerns a spouse's supplementary card on already-known handsets, not this device or country). Network shows the anomaly is isolated rather than part of a ring -- both devices have empty sharedWith lists and merchants are low-risk (0.25-0.33) -- but that does not negate the fraud signal; it simply indicates this looks like an isolated account-takeover/lost-card scenario rather than an organized ring. The combination of new device + new country + off-hours + elevated amounts + no customer explanation on file is consistent with fraud at high confidence. However, the four transactions occurred in a single burst on 2026-02-27 with nothing indicating activity is continuing or that the card is still being actively used -- the burst appears to have concluded rather than being demonstrably ongoing.</parameter>\n",
+    "recordedAt": "2026-08-29T05:27:53.063Z"
+  },
+  {
+    "accountId": "A00446",
+    "verdict": "insufficient_evidence",
+    "confidence": "medium",
+    "reasoning": "Behaviour flags a genuinely anomalous pattern: 11 transactions in 40 minutes on the known/exclusive device D004460, with amounts within normal baseline ($42.63-$777.78, well under the $4486 5x-p90 threshold), but rapid country-hopping (SG->IN->IN->IN->TH->IN->IN->SG->IN->IN->IN) never seen in 3.5 months of history (90% IN, ~1% SG, ~4% TH). Context shows no customer communication addressing travel or this cross-border pattern -- the only note (N00184) covers seasonal spend volume, not geography, leaving the anomaly unexplained but also not contradicted. Network found no shared-device fraud-ring link (device is exclusive to this customer), but identified a real coincidence signal: burst transactions at high-risk gaming/giftcard merchants (risk 0.65-0.88) co-occurring with 16-27 other accounts at the same merchants within 48h, far above the 4-10 accounts seen at low-risk merchants in the same burst -- suggestive of a broader card-testing/cash-out ring, but this is circumstantial merchant-coincidence, not direct evidence this specific account is compromised or complicit. The three specialists point in different directions: Behaviour is ambivalent (device/amount normal, geo anomalous), Context neither confirms nor refutes, and Network's strongest signal is a network-level coincidence rather than proof of fraud on this account. This does not cleanly resolve to fraud or legitimate -- it's a case where a real anomaly (geo-hopping) intersects with a real network risk signal (high-risk merchant coincidence) but neither individually nor together rises to high-confidence fraud on this account.",
+    "recordedAt": "2026-08-29T05:28:05.735Z"
+  },
+  {
+    "accountId": "A00884",
+    "verdict": "legitimate",
+    "confidence": "high",
+    "reasoning": "Behaviour confirms the alert's \"new device\" trigger was a false characterization -- D008840 has been the sole known device since 2021, and same-day/device surrounding transactions are normal, indicating an isolated single-transaction amount spike rather than a behavioral change. Context provides a strong independent corroboration: case note N00227 from a branch visit two days prior has the customer telling staff they intended to buy wedding jewellery worth ~$159,328, matching this $159,328.84 transaction almost exactly, with staff pre-warning about a possible flag. Network shows the device is exclusive to this customer (no cross-account linkage) and merchant coincidence levels are all within normal background ranges, ruling out ring activity or a targeted fraud pattern. All three specialists align: the amount-driven alert is a false positive, not fraud.",
+    "recordedAt": "2026-08-29T05:28:07.001Z"
+  },
+  {
+    "accountId": "A00868",
+    "verdict": "insufficient_evidence",
+    "confidence": "medium",
+    "reasoning": "Behaviour flags a genuine anomaly: a burst of 4 transactions (T0107883-T0107886) on a brand-new device DX01497 in Malaysia, 30-82x the account's p90 baseline (472.73), immediately following a known-device IN transaction ~8 hours earlier -- triggering the impossible-travel rule. Context partially explains the geography/device pattern via case note N00224, where the customer disclosed a son at university in MY uses the card, but that note does not confirm this specific new device or amounts of this magnitude (30-82x baseline), leaving the size of these particular transactions unverified. Network found no ring linkage: both devices are exclusive to this customer, and merchant coincidence is only elevated at low-risk categories except one borderline gaming transaction (0.73 risk, 20 coincident accounts) that doesn't breach a hard threshold. Given Context's partial-but-incomplete explanation and Behaviour's clear statistical anomaly, specialists don't align on a clean fraud/legitimate call -- the son-in-MY story covers the pattern's existence but not its magnitude, so this is genuinely inconclusive rather than a confident fraud or legitimate determination.",
+    "recordedAt": "2026-08-29T05:28:15.703Z"
+  },
+  {
+    "accountId": "A00974",
+    "verdict": "legitimate",
+    "confidence": "high",
+    "reasoning": "Behaviour confirms the \"new device\" premise of the alert is false: D009740 is in the account's known device history with normal low-value usage two days prior, and the IP country (IN) matches the account's dominant historical country (90.4%). While the amount is a large statistical outlier (~176x p90, ~2,345x median), Context provides a direct explanation: case note N00153 from the day before shows the customer proactively asked in-app whether a ~$152,616 purchase would go through, explicitly for a laptop purchase, and staff confirmed sufficient limit -- matching the flagged transaction's amount and timing almost exactly. Network adds no risk signal: both devices have empty sharedWith lists, merchant coincidence (14 accounts, risk score 0.03) is unremarkable, high-risk merchant usage is at/below baseline, and there is no linkage to fraud rings. All three specialists converge on a benign explanation with no contradicting evidence.</parameter>\n</invoke>\n",
+    "recordedAt": "2026-08-29T05:29:11.730Z"
+  },
+  {
+    "accountId": "A01143",
+    "verdict": "fraud",
+    "confidence": "high",
+    "reasoning": "Behaviour flags T0107220 (~$15,653.08) as ~23x the account's p90 baseline ($679.69), a stark spend anomaly coinciding with the R01 velocity spike (>6 auths/60min, trigger T0107223). Context corroborates strongly: case note N00066 (same day, 2026-02-27) records the customer reporting the wallet stolen at a railway station, requesting the card be blocked, and filing a police report (FIR/5138); dispute DP0048 has the customer stating no OTP was received and that someone else has account access -- an explicit unauthorized-use claim, not an innocent explanation. Network is inconclusive but non-contradictory: the device (D011430) is exclusive with no shared customers (rules out device-based mule ring), and merchant overlaps are mostly low-risk, with only one borderline, isolated $114.37 gaming transaction. The combination of a corroborated stolen-card/compromise report with a matching spend/velocity anomaly supports a high-confidence fraud verdict.\n\nHowever, per policy, block_card requires concrete evidence the exposure is current/ongoing. Here, Context indicates the customer already reported the wallet stolen and had the card blocked at their request on the same day, and a police report was filed -- this is a corroborated, already-contained incident, not an ongoing exposure. There's no indication in Behaviour, Context, or Network that unauthorized activity is continuing past this reported/blocked point.",
+    "recordedAt": "2026-08-29T05:29:19.265Z"
+  },
+  {
+    "accountId": "A00629",
+    "verdict": "legitimate",
+    "confidence": "high",
+    "reasoning": "Context provides strong exculpatory evidence: case note N00188 (dated 2026-02-25, prior to the transaction) shows the customer pre-notified the bank of intent to make this exact ~116,807 purchase for a laptop, and staff confirmed sufficient limit. The customer's own dispute statement (DP0071) explicitly says \"I did make this purchase,\" confirming authorization; the dispute is about non-delivery of goods, not unauthorized use. Network corroborates this: both devices, including the new one flagging R02, are exclusive to this customer with no shared-device overlap or link to flagged rings, and merchant coincidence patterns are unremarkable relative to baseline. Behaviour's anomaly flag is terse and only reflects the transaction's deviation from historical spend pattern (large amount, new device), which is fully explained by the pre-notification and confirmed by the customer's admission. No specialist evidence contradicts legitimacy; the only live issue is a separate commercial delivery dispute, not fraud or account takeover.",
+    "recordedAt": "2026-08-29T05:29:22.834Z"
+  },
+  {
+    "accountId": "A00789",
+    "verdict": "insufficient_evidence",
+    "confidence": "medium",
+    "reasoning": "Behaviour flags a genuine outlier: 5 SG txns totaling $117,747, each 29x-77x the p90 baseline, in an 8-hour window, on an account that is 88.6% IN and has never had SG activity before, plus a brand-new device D007891 first seen just before the burst and used alongside the established device D007890. Context partially explains this: travel notice N00099 (filed 2026-02-21) confirms the customer told the bank they'd be in SG from Feb 18, accounting for the location/country shift, and dispute DP0056 confirms the customer personally made at least one of the five burst transactions (T0107370). However, neither piece of Context evidence explains the new device D007891 or the extreme 29x-77x spend multiples across all five transactions -- those anomalies remain unaddressed. Network adds no independent signal toward fraud: both devices are exclusive to this customer (no cross-account sharing), merchants are low/moderate risk with no high-risk categories, and there's no linkage to other flagged accounts or ring activity. Behaviour and Context effectively disagree on interpretation (clear anomaly vs. partially-explained travel spend), and no specialist's evidence resolves whether this is heavy legitimate travel spending on a new device or a takeover riding on genuine travel dates. Per policy, this ambiguity means verdict should be insufficient_evidence rather than forcing fraud/legitimate. Behaviour notes spending reverted to normal immediately after the burst, meaning the anomalous activity has already concluded -- there is no evidence of ongoing/current exposure, so block_card's requirement of current, unresolved exposure is not met even if we leaned toward fraud. Given insufficient_evidence combined with genuinely high stakes (five figures moved, ambiguous device and dispute signals, no full explanation), escalate_case is warranted so a human investigator can reconcile the device anomaly and dispute against the travel notice, rather than closing this as routine.</parameter>\n</invoke>\n",
+    "recordedAt": "2026-08-29T05:29:59.445Z"
+  },
+  {
+    "accountId": "A01134",
+    "verdict": "insufficient_evidence",
+    "confidence": "medium",
+    "reasoning": "Behaviour flags the spend as anomalous relative to this account's normal pattern (a single large transaction, T0107089 for $13,306.87, driving 90% limit utilization in 48 hours). Context confirms no case notes or disputes explain this spike, and the only prior case (PC0177) is unrelated and 17 months old, so the activity is currently unexplained. However, Network found no device-sharing links (both devices exclusive to the customer) and rated the merchant coincidence data as inconclusive -- giftcard merchant overlap (0.57) is present but comparable overlap exists at low-risk everyday merchants, suggesting baseline noise rather than a decisive ring/takeover signal. This is a real anomaly with no explanation, but the specialists do not converge on a fraud verdict: Behaviour's anomaly finding is not corroborated by any network signal of compromise, and there's no direct evidence (device takeover, confirmed dispute) tying this to fraud versus an unusual but legitimate large purchase. The size and recency (within 48 hours, near limit) means stakes are high enough that this shouldn't just sit unresolved.",
+    "recordedAt": "2026-08-29T05:30:01.478Z"
+  },
+  {
+    "accountId": "A00939",
+    "verdict": "fraud",
+    "confidence": "high",
+    "reasoning": "Behaviour flags a sharp, unexplained break: a burst of 4 app-channel transactions (~110,158 total) starting 2026-02-27T10:17:27 from a new/unrecognized device DX01493, from ipCountry DE (account is 87% IN, only 2.9% DE historically), each transaction 24x-49x the account p90 (738.45) and above the account's all-time max (602.97 across 69 prior transactions since 2025-11-02). This is a classic impossible-travel/account-takeover signature. Context corroborates: the only case note (N00217) predates the burst by two weeks, discusses a spouse's supplementary card on registered handsets, and never mentions Germany or device DX01493; no dispute has been filed; the sole prior case (PC0043) is an unrelated closed false positive -- nothing explains this burst. Network shows device DX01493 is isolated (empty sharedWith) and merchants are low-risk (0.04-0.17), which rules out a coordinated ring but is consistent with a single-account takeover via a new device. Together this supports a high-confidence fraud verdict driven by account takeover rather than a network fraud ring.\n\nRegarding action: policy requires, in addition to high-confidence fraud, concrete evidence the exposure is current (within last 48 hours) and not already concluded. The activity described is a bounded 'burst' of 4 transactions with a start time but no indication that further transactions are actively occurring now or that the burst is still in progress -- it reads as a discrete incident. There is also no dispute/report yet and no explicit statement of ongoing attempts. Given this ambiguity about whether the exposure is still live versus a concluded one-off, and the high monetary stakes and takeover pattern warranting human investigator review, escalate_case is the appropriate recommendation rather than block_card.",
+    "recordedAt": "2026-08-29T05:30:21.165Z"
+  },
+  {
+    "accountId": "A00847",
+    "verdict": "fraud",
+    "confidence": "high",
+    "reasoning": "Behaviour shows a burst of 5 transactions within ~12 hours starting at T0106749, each 200x-436x the account's baseline p90 of $607.57, totaling nearly $1M in a single day, versus a 4-month baseline of 56 txns with 94.6% in-person/ecom and 0% night activity. Context shows nothing explains this: no case notes, and the only open dispute (DP0007) concerns a different, unrelated transaction and itself alleges fraud rather than confirming legitimate spend; Context also notes a prior confirmed fraud case (PC0158) evidencing prior compromise. Network shows the burst concentrated in high-risk cash-out-prone categories (gift cards 0.57-0.72, gaming 0.78) with 12-18 other accounts coincidentally transacting at the same merchants in the same window, consistent with mule/cash-out activity. All three specialists align on an anomalous, unexplained, high-risk pattern, supporting a high-confidence fraud verdict. The triggering alert (R08) indicates this crossed 90% of the limit within 48 hours, and nothing in Context or Network shows the burst has concluded, been reported by the customer, or that the card is already blocked -- so exposure is current and ongoing.",
+    "recordedAt": "2026-08-29T05:30:52.312Z"
+  },
+  {
+    "accountId": "A00182",
+    "verdict": "insufficient_evidence",
+    "confidence": "medium",
+    "reasoning": "Behaviour identifies a clear, sharp anomaly: a burst of 4 transactions (T0107399-T0107402) each 42x-75x the account's p90 baseline, originating from a brand-new device DX01461 in Singapore, occurring within a physically impossible travel window relative to a normal India transaction just hours earlier, and spanning both cards K001821 and K001820. This is strong evidence of anomalous activity.\n\nHowever, Context provides a partial mitigating explanation: case note N00108 confirms a known, benign reason for Singapore activity (customer's son at university there, using a second device/card for living costs). This materially weakens the 'impossible travel' framing since the traveler may not be the account holder at all. But Context explicitly flags three gaps this note does NOT cover: (1) the device used is a brand-new, never-before-seen device, not the previously known 'second device'; (2) the amounts (~$35-40K each, >$120K total) are wildly inconsistent with 'living costs'; (3) both cards were hit in the same burst, not just the son's usual card. These gaps mean the benign explanation only partially covers the facts.\n\nNetwork adds a mild aggravating signal (one of the four transactions hit a high-risk 0.86 crypto exchange with 8 other accounts transacting there concurrently) but finds no device-sharing/ring linkage, and the other 3 merchants show coincidence counts within the account's normal range. Network explicitly calls this inconclusive.\n\nGiven Behaviour and Context are in tension (clear anomaly vs. partially-explained benign pattern that doesn't cover the magnitude/new-device/both-cards facts) and Network is inconclusive with only a mild aggravating flag, the specialists do not converge on a clean fraud or legitimate call. This is a genuine case of disagreement/inconclusiveness rather than a forced binary -- verdict is insufficient_evidence at medium confidence given the seriousness of the unexplained magnitude and new-device facts.",
+    "recordedAt": "2026-08-29T05:30:59.331Z"
+  },
+  {
+    "accountId": "A00271",
+    "verdict": "insufficient_evidence",
+    "confidence": "medium",
+    "reasoning": "Behaviour flags an unprecedented spike (5 txns at 410x-555x p90 baseline, no historical precedent) which is strong anomaly evidence. However Context shows a partially mitigating factor: a documented case note (N00206) about lumpy trading-business invoice settlement with source-of-funds on file, plus a prior false_positive closure (PC0133) showing this customer has previously been confirmed to self-authorize large/unusual transactions -- though neither explanation specifically covers money-transfer/high-risk merchant usage, so it's not a full clearance either. Network adds a real but non-conclusive signal: no shared-device link (D002710 is exclusive to this customer, undercutting a mule-device theory), but elevated coincidence (13-22 other accounts vs typical 2-16) at the same high-risk merchants during the burst window, which is suggestive but explicitly described as 'not conclusive proof of a ring.' With Behaviour pointing to fraud, Context only partially explaining it, and Network providing suggestive-but-inconclusive linkage, the three specialists do not converge on a clean fraud call -- this is a genuine disagreement/inconclusive mix rather than a confident fraud determination, so verdict must be insufficient_evidence rather than forcing fraud or legitimate.",
+    "recordedAt": "2026-08-29T05:31:27.305Z"
+  },
+  {
+    "accountId": "A00914",
+    "verdict": "fraud",
+    "confidence": "high",
+    "reasoning": "Behaviour found 5 transactions (T0107909-T0107913) in a 12-hour window at 155x-223x baseline p90 (463.10), far exceeding the 20x CLEAR anomaly threshold - a severe, decisive magnitude anomaly despite consistent device/geo. Context shows only a generic, pre-existing (11 days prior) RM note about 'travel and supplier deposits' that does not specifically authorize a 5-transaction burst at high-risk merchants consuming 90% of the credit limit - the explanation is partial at best and does not cover this specific event. Network confirms all 5 burst transactions hit high-risk money-transfer merchants (risk 0.65-0.88) with abnormally high coincident-account counts (19-28 vs baseline ~5), consistent with coordinated fan-out/mule activity, even though no shared device was found. The convergence of extreme behavioral deviation, high-risk merchant concentration, and anomalous coincident-account network pattern outweighs the weak, non-specific business-use explanation, supporting a high-confidence fraud verdict.",
+    "recordedAt": "2026-08-29T05:31:41.230Z"
+  },
+  {
+    "accountId": "A01135",
+    "verdict": "fraud",
+    "confidence": "high",
+    "reasoning": "Behaviour: 4+ card_present transactions within 36 minutes at 20x-44x baseline (p90 $540.31), e.g. T0107054 at $10,877.48 -- clear anomaly. Context: wallet reported stolen at a railway station same day, police report FIR/1454 filed, card already blocked, dispute DP0032 on trigger transaction T0107057 states unauthorised use, card never left wallet; no prior fraud history, no travel notice, no pre-auth. Network: both devices exclusive to this customer, no shared-device ring links; elevated merchant coincidence counts are all low-risk-score, consistent with normal overlap not a ring. All three specialists align on fraud at high confidence. Per policy, block_card requires evidence exposure is current; here the card is already blocked and the burst has concluded (one-off theft-driven incident), so nothing remains to stop by blocking -- this fits escalate_case's criterion for a serious but already-concluded incident needing investigator follow-through.</parameter>\n",
+    "recordedAt": "2026-08-29T05:32:27.390Z"
+  },
+  {
+    "accountId": "A00731",
+    "verdict": "insufficient_evidence",
+    "confidence": "medium",
+    "reasoning": "Behaviour flags a strong anomaly: 4 app transactions (T0107708-T0107711) at 39-46x the €743.92 p90 baseline, from a brand-new device DX01484 in DE, with no prior DE app usage history (93% IN baseline). This independently clears policy's amount threshold (>20x p90). Interleaving with normal IN card_present activity (T0065890) on the known device D007310 just 53 minutes later is what triggered the impossible-travel rule.\n\nHowever, Context materially complicates a clean fraud call: a prior case note (N00185, 2026-02-13) has the customer proactively explaining a second DE device belongs to their son, a university student, for living costs -- meaning DE/new-device activity per se was already disclosed and not itself unexplained. The note doesn't cover the specific scale (€29k-34k per transaction) or the tight interleaving timing, so it's a partial, not full, explanation -- Context's own label is 'partially_explained', not 'explained' or 'anomalous'.\n\nNetwork adds a moderate aggravating signal but not proof: two of the transactions hit high-risk moneytransfer merchants (risk_score 0.88 and 0.83) with unusually high coincident-account counts (27 and 20 respectively) versus the account's other lower-risk transactions -- consistent with possible participation in a wider money-movement pattern. But there's no shared-device linkage to other accounts, so Network stops short of confirming a fraud ring.\n\nThe three specialists don't converge on a single clean story: Behaviour says clearly anomalous, Context says partially explained (a known family member's device, just at a scale/pattern not previously disclosed), Network says linked via merchant risk but not conclusively coordinated fraud. This is exactly the kind of disagreement/genuine inconclusiveness where policy calls for insufficient_evidence rather than forcing fraud or legitimate. Given the size of the amounts (€29k-34k, far above baseline) and the moneytransfer merchant risk with many coincident accounts, the stakes are high enough that this shouldn't just sit unresolved -- it warrants human investigator review rather than 'none'.",
+    "recordedAt": "2026-08-29T05:32:29.542Z"
+  },
+  {
+    "accountId": "A00909",
+    "verdict": "fraud",
+    "confidence": "high",
+    "reasoning": "Behaviour flags the trigger txn (53,417.23) as a clear statistical anomaly: ~30x p90 baseline and ~132x mean, on device DH008 which is effectively new (first seen only ~49h prior, and only appears in \"baseline\" because that same session leaked into the window), and from IP country TH which has zero prior history (baseline 90.9% IN/6.1% SG/3.0% AE). Context found no explanation whatsoever -- the only file note concerns an unrelated, branch-verified shared family tablet, with nothing addressing Thailand travel, DH008, or a transaction near this amount. Network adds a strong corroborating signal: DH008 is shared with 2 other customers (C00955, C00247), and the account's other device DH007 is also shared with 2 different customers -- only 16/1,520 bank-wide devices are ever shared, so having two shared devices on one account is highly anomalous. The same-window txn T0108122 occurred at a high-risk crypto exchange (risk_score 0.68, 9 coincident other accounts nearby), far above this account's routine merchant risk profile (0.14-0.25), suggesting device/account compromise or a fraud ring rather than innocent device sharing. All three specialists align (anomalous behaviour, unexplained context, linked/suspicious network), so this is not a disagreement case -- it meets high-confidence fraud.",
+    "recordedAt": "2026-08-29T05:32:56.370Z"
+  },
+  {
+    "accountId": "A00594",
+    "verdict": "fraud",
+    "confidence": "high",
+    "reasoning": "All three specialists converge on fraud with concrete, current evidence. Behaviour: four app transactions on 2026-02-27 at 80-114x the account's p90 baseline ($98.6K-$139.3K vs p90 $1,220.95), all at high-risk merchants (crypto/gift card/money transfer), well above the 20x CLEAR-anomaly threshold; on 2026-02-28 a $65,239.18 transaction (53x p90) used deviceId DR001, never before seen on this account (known devices D005940/D005941) -- a compounding new-device+elevated-amount CLEAR anomaly. This activity is within the last 48 hours (02-27 and 02-28), not historical. Context: no legitimate explanation on file; customer admitted in a 2026-02-28 case note to receiving and forwarding money for a 'friend' -- a textbook money-mule admission; separately the customer filed dispute DP0033 (2026-03-01) claiming non-authorization on a transaction, indicating either takeover or a contradictory/evasive cover story. Prior case PC0146 closed insufficient_evidence with customer going unreachable shows no track record of clean resolution. Network: the new device DR001 is shared across 4 other customers with high coincidence at the same risky money-transfer merchants, consistent with an active mule/fraud ring rather than an isolated event. Nothing in Context or Network suggests the exposure has concluded -- the dispute was filed after the burst, and the new device appears actively linked to a live network. This combination (recent burst, new never-seen device, active network linkage, unresolved dispute) indicates ongoing exposure rather than a closed one-off incident.",
+    "recordedAt": "2026-08-29T05:33:04.561Z"
+  },
+  {
+    "accountId": "A00181",
+    "verdict": "insufficient_evidence",
+    "confidence": "medium",
+    "reasoning": "Behaviour flags a severe statistical anomaly: five uniform 50000 dollar transactions every 3 hours totaling 250000 dollars in 12 hours, about 129 times baseline p90, on the same known device - ruling out simple takeover. Context offers a plausible but non specific mitigating factor: a prior case note about lumpy invoice settlements that does not name this exact burst or the high risk merchant category. Network shows all five transactions hit high risk money transfer merchants with elevated coincident account activity that it explicitly cannot distinguish from ring activity versus a legitimate hub. The evidence is genuinely conflicting.",
+    "recordedAt": "2026-08-29T05:33:05.482Z"
+  },
+  {
+    "accountId": "A00346",
+    "verdict": "insufficient_evidence",
+    "confidence": "medium",
+    "reasoning": "test",
+    "recordedAt": "2026-08-29T05:33:18.793Z"
+  },
+  {
+    "accountId": "A01014",
+    "verdict": "fraud",
+    "confidence": "high",
+    "reasoning": "Behaviour confirms a clear, extreme anomaly: two transactions (T0107242 $19,765.53, T0107243 $22,091.43) at 34x-38x the account's p90 ($582.80) within a 3-hour window on 2026-02-27, versus a prior largest-in-window of only $497.67 -- magnitude alone is far outside normal variation. Network adds a strong corroborating signature: the same-day gift-card purchases (T0107243 riskScore 0.78/17 coincident accounts, T0107244 riskScore 0.62/19 coincident accounts, T0107245 riskScore 0.57/13 coincident accounts) all sit well above the routine baseline coincidence of 12 accounts/0.09 riskScore seen on grocery spend -- a classic cash-out/money-laundering pattern consistent with account takeover. Context finds no case notes or explanation legitimizing this spend-up, and flags an unrelated but concerning dispute (DP0051) where the customer denied recognizing charges made while asleep, suggesting the account may already be compromised rather than providing any innocent explanation. All three specialists align (anomalous behaviour + risky network pattern + no legitimizing context, plus a corroborating unauthorized-access signal), supporting high confidence in fraud rather than a benign explanation.\n\nFor action: the triggering alert (AL0152) is based on T0107245, which is part of the same 2026-02-27 burst as T0107242-T0107244, and the limit-approach trigger (90% of credit limit within 48 hours) indicates the exposure is current/recent (within the last 48 hours) with no evidence in Context or Network that the burst has concluded, been reported by the customer, or that the card/account is already blocked -- so this is not a closed, one-off historical incident.",
+    "recordedAt": "2026-08-29T05:34:01.492Z"
+  },
+  {
+    "accountId": "A00481",
+    "verdict": "legitimate",
+    "confidence": "high",
+    "reasoning": "Behaviour confirms the transaction is a statistical outlier (163x p90, 380x median) but also clarifies the \"new device\" alert trigger was inaccurate -- D004810 actually matches the device on file, undermining the account-takeover signal the rule was built on. Context provides a strong, independent corroboration: case note N00232, logged the same day, records an in-branch conversation where the customer pre-disclosed intent to spend ~$99,381 on wedding jewellery, and staff proactively warned them the transaction might be flagged and to keep their phone available for OTP -- this is a direct, pre-transaction match to the amount and purpose, indicating anticipated legitimate activity rather than compromise. Network confirms the device has been exclusively tied to this customer since 2023 with no shared-device links to any of the bank's known fraud rings, and the merchant pattern (jewellery store + grocery) is unremarkable. All three specialists converge: the size is explained by a corroborated, pre-announced purchase, the device is genuinely the customer's own, and there is no network linkage suggesting takeover or fraud ring involvement.",
+    "recordedAt": "2026-08-29T05:34:22.724Z"
+  },
+  {
+    "accountId": "A00305",
+    "verdict": "insufficient_evidence",
+    "confidence": "medium",
+    "reasoning": "Evidence is mixed and doesn't cleanly resolve to fraud or legitimate. In favor of legitimate: Context's case note from the day before (customer stated intent to do heavy festival shopping \"for the next fortnight\") plausibly explains elevated velocity and spend, all burst amounts stayed below the 5x standalone-anomaly threshold (1.2x-2.7x p90), device was consistent/known throughout (no new-device flag), and Network confirms D003050 is exclusive to this customer with no shared-device link to other accounts -- ruling out the most common device-based fraud signature. There's also a prior precedent (PC0014) of a similar velocity alert being customer's own spending, though it's stale.\n\nAgainst legitimate: the customer's stated plan does not explain three specific anomalies that Behaviour and Network both flag: (1) use of two different cards (K003051, K003050) in the same burst, (2) mixed channels (card_present, ecom, app) within 24 minutes, and (3) one transaction (T0107627, $570.62) with ipCountry TH versus the account's 93.5% IN norm. Network adds an independent, unexplained signal: three burst transactions hit high-risk gaming/digital and gift-card merchants with coincident-account counts (28, 20, 17) far above this account's historical baseline (5-16), a pattern \"consistent with, though not proof of\" card-testing/muling touching multiple accounts simultaneously -- this is not addressed at all by the festival-shopping explanation.\n\nSpecialists effectively disagree on net assessment: Behaviour calls it anomalous, Context says it's \"partially\" explained (explicitly leaving multi-card, mixed-channel, and geo-outlier unexplained), and Network flags a network-level pattern beyond what any single card/device view can resolve. This is not a clean binary call -- multiple unexplained outliers (two cards, TH IP, high-risk/high-coincidence merchants) coexist with a plausible partial explanation and no shared-device or dispute evidence. Per policy, this warrants insufficient_evidence rather than forcing fraud or legitimate.",
+    "recordedAt": "2026-08-29T05:34:26.477Z"
+  },
+  {
+    "accountId": "A01002",
+    "verdict": "insufficient_evidence",
+    "confidence": "medium",
+    "reasoning": "Behaviour flags the burst as anomalous: three 50000 dollar money-transfer transactions plus a gift card purchase driving utilization to 90 percent of the credit limit within 48 hours. Context provides a partial mitigant: branch note N00213, dated before the burst, documents a legitimate trading business with lumpy month-end supplier settlements and documented source of funds, but this note does not specifically address crypto or gift-card or money-transfer merchant activity, so it only partially explains the flagged transactions rather than fully clearing them. Network adds a distinct concern: the three 50000 dollar transfers and the gift-card purchase each coincided with 13 to 25, and 18 respectively, other accounts hitting the same high-risk merchants in the same window, a clustering signature sometimes seen with fraud rings or compromised payment rails, though there is no direct device link to other accounts since both devices are exclusive to this customer, and no disputes or fraud reports exist on file. The specialists findings are not fully aligned. Behaviour sees anomaly, Context offers a partial not full legitimate explanation, and Network sees a concerning but inconclusive coincidence pattern without a device level link. This mix does not support a confident binary fraud or legitimate call.",
+    "recordedAt": "2026-08-29T05:34:44.296Z"
+  },
+  {
+    "accountId": "A00463",
+    "verdict": "fraud",
+    "confidence": "high",
+    "reasoning": "Behaviour confirms a classic card-testing cadence (six small ~$8.60 ecom auths within 8 minutes) followed ~45 min later by an outlier-large transaction (~$46,115.92, ~195x baseline p90) - a pattern inconsistent with the account's normal spending. Context strongly corroborates this as unauthorized activity: the customer proactively self-reported the small charges as unrecognised (N00002), confirmed the physical card is in their possession (ruling out simple card-present misuse), stated no OTP was received for any of the transactions, and opened a formal dispute (DP0002) believing someone else has account access; no benign explanation (device upgrade, merchant trial) was found. Network shows the exposure is isolated to this single account/device (D004630 exclusive to the customer) with no shared-device or ring linkage, so this is a self-contained account takeover rather than a broader network issue. However, per policy, block_card also requires concrete evidence the exposure is current/ongoing rather than historical. Here the customer has already reported the fraud and opened a dispute (dated 2026-02-28 and 2026-03-01, after the 2026-02-27 incident), which is exactly the kind of signal the policy treats as indicating the burst has already concluded rather than being an active, ongoing exposure. There's no indication further unauthorized transactions are occurring now. This takes it out of block_card territory and into escalate_case: confidence is high and the fraud is confirmed, but the activity appears concluded and the case still warrants investigator attention (e.g., to coordinate with the dispute process, confirm the card is fully secured, and review account access) rather than an automatic block.",
+    "recordedAt": "2026-08-29T05:34:59.778Z"
+  },
+  {
+    "accountId": "A01032",
+    "verdict": "insufficient_evidence",
+    "confidence": "medium",
+    "reasoning": "test",
+    "recordedAt": "2026-08-29T05:35:11.530Z"
+  },
+  {
+    "accountId": "A00103",
+    "verdict": "legitimate",
+    "confidence": "high",
+    "reasoning": "All three specialists converge on legitimacy despite the raw statistical anomaly. Behaviour confirms the device D001030 is established (not new, contrary to alert framing), and surrounding transactions on the same device show a normal small-amount pattern, indicating the anomaly is a one-off high-value event on a trusted device rather than a takeover signature. Context provides direct corroboration: case note N00237, logged the same day, records the customer pre-notifying branch staff in person of an imminent ~$179,893 jewellery purchase for a wedding, with staff explicitly warning it might be flagged and asking the customer to keep their phone available for OTP -- the amount and timing match T0107928 almost exactly. Network shows no shared-device links to other accounts (device is exclusive), no elevated coincidence at high-risk merchant categories, and the jewellery merchant coincidence is unremarkable (score 0.12, 16 accounts, in line with normal background). No indicators of takeover or ring involvement. Together this is a coherent, customer-initiated, pre-announced purchase, not fraud.",
+    "recordedAt": "2026-08-29T05:35:43.721Z"
+  },
+  {
+    "accountId": "A00192",
+    "verdict": "insufficient_evidence",
+    "confidence": "medium",
+    "reasoning": "Specialists partially conflict rather than converge. Behaviour flags a clear velocity anomaly (13 txns in 48 minutes vs baseline ~0.5/day), one decline, and one NL ipCountry transaction vs 88.7% IN baseline. Context shows a customer advance-notice note about festival/family shopping that explains general volume/amount increase but not the specific velocity spike, decline, or foreign IP transaction. Network finds no shared-device link (device exclusive to customer), but 6 of 13 burst transactions hit high-risk gaming/giftcard merchants with 16-22 other accounts transacting there in the same window -- consistent with card-testing/fraud-ring signature, though Network itself flags this could be coincidental. No specialist reaches high confidence of fraud, and legitimate partial explanation exists, so it doesn't cleanly resolve either way.",
+    "recordedAt": "2026-08-29T05:36:06.223Z"
+  },
+  {
+    "accountId": "A01065",
+    "verdict": "fraud",
+    "confidence": "high",
+    "reasoning": "Behaviour flags a CLEAR compounding fraud signal: three transactions ($9,848.17, $34,785.08, $33,853.91) on 2026-02-27 from an unrecognized device (DX01447, not in known list [D010650]) in Thailand, a country representing only 2.5% of historical activity vs 87.7% IN, with amounts 16x-57x the p90 baseline ($607.08) and two exceeding the 20x CLEAR threshold outright. Context confirms this burst is entirely unexplained -- the only case note (N00088) documents a spouse using a different known/registered handset domestically, with no mention of Thailand, DX01447, or large transactions, and no disputes/prior fraud cases exist to explain it either way. Network found no fraud-ring linkage via device sharing (both devices exclusive to this customer) and the TH merchants were low-risk, but this is inconclusive rather than exculpatory -- it neither confirms nor refutes takeover. Critically, Behaviour notes legitimate low-value activity on the known device/country continued interleaved on the same day, which is the classic account-takeover signature (genuine cardholder's normal pattern persisting alongside an attacker's anomalous burst) rather than genuine travel. Combined, this meets a high-confidence fraud verdict.\n\nHowever, per policy, block_card requires concrete evidence the exposure is current/ongoing, not historical. The flagged burst occurred entirely on 2026-02-27 (all three transactions), and there is no transaction data indicating anomalous TH/DX01447 activity is continuing into the present. The most recent transaction noted (2026-03-01, $32.33 gift card) is unrelated to the TH device/burst per Network. Behaviour/Context/Network give no indication the exposure window is still open -- the burst appears to have concluded as a single-day incident. This does not meet the block_card bar of demonstrated ongoing exposure within the last 48 hours with no sign of conclusion.",
+    "recordedAt": "2026-08-29T05:36:21.077Z"
+  },
+  {
+    "accountId": "A00985",
+    "verdict": "insufficient_evidence",
+    "confidence": "low",
+    "reasoning": "test",
+    "recordedAt": "2026-08-29T05:36:30.597Z"
+  },
+  {
+    "accountId": "A00428",
+    "verdict": "fraud",
+    "confidence": "high",
+    "reasoning": "Behaviour found a clear anomaly: device DX01471 is unseen in the 55-txn baseline, UAE is only 1.8% of historical activity vs 90.9% India, and transaction amounts (22x-72x baseline p90 of $588.19) far exceed the 20x clear-anomaly threshold, with one txn also in a rare night window. Critically, the legitimate device D004280 was active in India (18:53:15, $72.32) during the same window the UAE transactions claim to originate from -- physical impossibility indicating account takeover rather than mere unusual spending. Context confirms no explanation exists: the only account note predates the incident and never mentions UAE travel or this device, no disputes have been filed, and no prior fraud history exists to suggest a pattern of false alerts. Network adds that both devices are exclusive to this customer (ruling out simple device-sharing fraud rings) but flags that two of the four transactions hit high-risk merchants (money transfer 0.77, gaming/digital 0.76) with abnormally high coincidence counts (22 and 19 other accounts within 48h), suggesting this account's takeover intersects a broader fraud burst at those merchants. All three specialists point the same direction -- impossible travel, no legitimate explanation, high-risk cash-out-style merchants -- supporting a high-confidence fraud verdict via account takeover.",
+    "recordedAt": "2026-08-29T05:36:34.900Z"
+  },
+  {
+    "accountId": "A00985",
+    "verdict": "insufficient_evidence",
+    "confidence": "medium",
+    "reasoning": "Behaviour flags the burst as extreme numerical outliers, 80x-144x baseline p90, clearing the anomaly threshold. Context partially resolves this: case note N00080 documents a verified-KYC phone upgrade and device re-registration on 2/14, explaining why device DX01444 is new, but the note does not address the magnitude of the four transactions, leaving the dollar-value anomaly unexplained. Network found no aggravating linkage: DX01444 and all other devices have empty sharedWith lists, isolated with no third-party device sharing, and the burst hit only ordinary low-to-moderate risk merchants with normal coincident-account counts, not a high-risk or money-laundering merchant pattern. The account's historical higher-risk-category activity is at ordinary coincidence levels, not elevated. One axis, device, is legitimately explained, one axis, amount, is unexplained, and the network picture is clean rather than incriminating, so the specialists' evidence points in different directions rather than converging on either fraud or legitimate.",
+    "recordedAt": "2026-08-29T05:36:38.486Z"
+  },
+  {
+    "accountId": "A00298",
+    "verdict": "fraud",
+    "confidence": "high",
+    "reasoning": "All three specialists converge on fraud. Behaviour shows a burst of four transactions totaling 92763.65 dollars in under nine hours starting 2026-02-27T13:01:46, each 61x to 113x baseline p90 of 298.39 dollars, far exceeding the 20x anomaly threshold, with two transactions on new device D002981 never seen before, compounding the anomaly. Context confirms an active open dispute DP0030 filed 2026-03-02 on burst transaction T0107040 where the customer explicitly denies making the charges and states they occurred while asleep, with no benign explanation in case notes. Network shows burst transactions hit multiple high-risk gift-card merchants (risk 0.58 to 0.93) coincident with 11 to 17 other accounts, a classic cash-out and account-takeover signature, despite no direct device sharing. All signals align with no contradiction, supporting high confidence fraud. For the action decision, block_card requires concrete evidence of current, ongoing exposure. The burst concluded on 2026-02-27 after about nine hours, and the dispute was filed several days later on 2026-03-02, meaning the acute activity has already stopped rather than being in progress now; cumulative spend already reached about 90 percent of the limit so remaining exposure is minimal. The broader network cash-out pattern coincident with many other accounts represents a linked-account pattern needing investigation beyond a single specialist's scope, which meets the escalate_case bar.",
+    "recordedAt": "2026-08-29T05:37:18.934Z"
+  },
+  {
+    "accountId": "A00440",
+    "verdict": "insufficient_evidence",
+    "confidence": "medium",
+    "reasoning": "Behaviour flags the ~$112,868 transaction as anomalous, and Context's 2026-02-23 note explains general \"lumpy\" trading-business volume but explicitly does not address the crypto/gift-card/money-transfer merchant category that AL0179 (R05) specifically flagged -- leaving that high-risk pattern unexplained. No dispute has been filed, but the account has a prior confirmed-fraud/takeover case (PC0095, 2024), which raises baseline concern rather than mitigating it. Network found no shared-device links (sole device D004400, no sharedWith), which argues against simple device-based takeover, but did find markedly elevated coincident activity with many other accounts specifically at the same high-risk money-transfer merchants (T0107322-24, risk 0.75-0.81, 14-20 other accounts) versus only ordinary overlap at low-risk merchants (7 grocery, 3 transport) -- consistent with a coordinated multi-account scheme at these merchants. This is a genuine disagreement/partial picture: Context offers a plausible legitimate business explanation but it doesn't cover the specific flagged merchant category, while Network's coordinated-activity signal and the prior fraud history point toward risk. Evidence is not unanimous or complete enough for a firm fraud or legitimate call.",
+    "recordedAt": "2026-08-29T05:38:06.138Z"
+  },
+  {
+    "accountId": "A00164",
+    "verdict": "insufficient_evidence",
+    "confidence": "medium",
+    "reasoning": "Behaviour flags a severe, unprecedented anomaly: four transactions on 2026-02-27 totaling roughly 383,993 dollars in a 9-hour window, each 184x-261x baseline p90 of 441.20 dollars, pushing the account to 90 percent of its credit limit (AL0002 trigger). This far exceeds the 20x threshold Behaviour treats as a clear anomaly, and channel/country/device all match the customer's normal profile. However, Context finds no case notes, disputes, or prior fraud history, and no logged explanation for the surge, so there is no corroboration either way. Network shows the account and both devices are isolated with no shared-device links to other accounts, and merchant overlap with other accounts is low-to-moderate risk (0.09-0.35), inconsistent with an organized takeover ring. The known/recognized device argues against a stolen-device takeover, but the extreme, unprecedented spend concentrated in jewellery and electronics (high resale value) is also consistent with credential-based takeover on a legitimate device. The specialists' evidence points in different directions, so this does not cleanly resolve to fraud or legitimate.",
+    "recordedAt": "2026-08-29T05:38:10.536Z"
+  },
+  {
+    "accountId": "A01018",
+    "verdict": "fraud",
+    "confidence": "high",
+    "reasoning": "Behaviour flags the six card_present authorisations (~$89,894 in 60 minutes, 6-51x baseline p90) and the final GB-origin transaction (T0107031) as having no precedent in 150 txns / ~4 months of history, with the GB shift unprecedented against a 90.7% IN / 0.67% GB historical mix. Context corroborates this independently: a 2026-02-28 case note records the customer reporting the wallet stolen at a railway station on 2026-02-27 (same day as the spike), card already blocked by the customer, a police FIR filed, and an open dispute (DP0028) stating the customer does not recognize the charges and was asleep when they occurred. Network found the activity isolated -- no shared-device links from D010180 to other accounts, low-risk merchant categories, and the unrelated small gaming txns on 2026-03-01 are explicitly disconnected from this burst -- ruling out a broader network-compromise pattern but not undermining the fraud finding. All three specialists align: this is unauthorized use of a stolen card, confirmed by the customer's own report.",
+    "recordedAt": "2026-08-29T05:38:27.538Z"
+  },
+  {
+    "accountId": "A00565",
+    "verdict": "insufficient_evidence",
+    "confidence": "medium",
+    "reasoning": "Test",
+    "recordedAt": "2026-08-29T05:38:30.393Z"
+  },
+  {
+    "accountId": "A00925",
+    "verdict": "fraud",
+    "confidence": "high",
+    "reasoning": "Behaviour identified two bursts of high-risk-merchant (crypto/gift-card/money-transfer) transactions at 118x-280x baseline p90, with the second burst's trigger transaction (T0107968, 2026-03-01) originating from an unrecognized device DR002 never seen on this account before. Context adds a 2026-02-28 branch note where the customer admitted to \"receiving money and forwarding it on\" for a friend and was evasive about the source of incoming transfers -- staff flagged this as high risk, consistent with money-mule behavior rather than a legitimate explanation. Network corroborates this: DR002 is shared with two other customers (C00513, C00779) who were active on it during the exact window of this account's burst, and the high-risk merchant transactions show abnormal coincident activity with 15-27 other accounts at high risk scores (0.56-0.81) -- a pattern consistent with a mule network/device-sharing fraud ring rather than isolated, legitimate activity. The convergence of anomalous transaction volume, an unrecognized device, a customer admission of mule-like conduct, and cross-account device/merchant linkage supports a high-confidence fraud verdict.",
+    "recordedAt": "2026-08-29T05:38:33.885Z"
+  },
+  {
+    "accountId": "A00356",
+    "verdict": "insufficient_evidence",
+    "confidence": "medium",
+    "reasoning": "Behaviour specialist returned a \"mixed\"/inconclusive assessment -- findings were thin and neither confirm nor rule out anomaly, so we lack the high-confidence fraud signal needed for a binary call. Context found no explanation for either the velocity spike or the card-testing pattern; the only case note (generic seasonal spend comment) does not address rapid-fire small-dollar authorisations, and the one dispute on file is unrelated (T0107522, goods-not-received), so Context is affirmatively unexplained rather than exculpatory. Network, however, provides a distinct and serious signal: 6 high-risk gift-card/gaming merchant authorisations within a ~24-minute burst, each merchant coincidentally shared with 12-21 other accounts transacting in the same window -- a cross-account pattern consistent with coordinated card-testing/fraud-ring activity, not explainable by this customer's own device (D003560 is exclusive, ruling out simple device-sharing fraud but not ring activity via stolen card data). Behaviour's inconclusiveness prevents a clean 'fraud' verdict, but Context's unexplained burst plus Network's cross-account coincidence signal make this too material to close out silently -- it clearly falls into the policy's 'insufficient_evidence but stakes high enough for human review' and 'broader linked-account/network pattern needing investigation beyond any single specialist' categories.",
+    "recordedAt": "2026-08-29T05:39:15.252Z"
+  },
+  {
+    "accountId": "A00160",
+    "verdict": "fraud",
+    "confidence": "medium",
+    "reasoning": "Behaviour flags three transactions on 2026-02-27 within a ~6hr window each 46-79x baseline p90 spend (~₹478), a pattern wildly outside the account's normal ~₹200/txn profile. T0106915 used a new card K001601 never seen in the 28-txn baseline, though on the known device D001600. Context found zero case notes, disputes, or prior investigations -- nothing explains the spike or the new card, so there's no legitimate account-holder explanation on file. Network shows T0106915 (Gift cards merchant, risk 0.78) has 19 other accounts transacting at the same merchant within +/-48h, and T0106916 (Electronics, risk 0.35) has 22 coincident accounts -- a coincident-merchant pattern consistent with mule/cash-out ring cash-out activity, though device D001600 itself is exclusive to this customer (no direct device-sharing link to other compromised accounts). The combination of an extreme, sudden spend spike, a brand-new unrecognized card, and a high-risk merchant with a suspicious coincident-account pattern is strong fraud signal, but confidence is capped at medium because: (1) the new card appearing on the same trusted device could reflect a legitimate reissue rather than compromise, (2) Network's link is merchant-coincidence, not a confirmed shared-device/ring linkage, and (3) Context has literally nothing to corroborate or refute either way. This is a genuine network/linked-pattern case needing investigator attention beyond what any one specialist resolved, which per policy calls for escalate_case rather than block_card (which requires high confidence). It also isn't a case for 'none' given the severity of the R08 alert and the concrete cash-out-ring-like merchant overlap.",
+    "recordedAt": "2026-08-29T05:39:41.778Z"
+  },
+  {
+    "accountId": "A00787",
+    "verdict": "insufficient_evidence",
+    "confidence": "medium",
+    "reasoning": "Behaviour flags three compounding anomalies: amount ~296x p90 baseline, a device (D007871) with no prior history, and a geo deviation to NL vs 90.8% IN baseline. Context partially resolves this: case note N00244, logged the same day, shows the customer pre-notified staff in-app about a ~137,959 laptop purchase for their daughter's course, and staff confirmed the limit was sufficient -- this matches the transaction amount and timing closely, explaining the high-value anomaly. However, the note is silent on the new device and NL location, so those two Behaviour signals remain unaddressed by any customer-side explanation. Network finds no aggravating pattern: both devices are exclusive to this customer (empty sharedWith), and the merchant coincidence (8 accounts, risk score 0.10) is unremarkable, ruling out a fraud-ring or coordinated-account explanation for the device/geo mismatch. Overall, the specialists partially agree (amount explained) but partially diverge (device/geo unexplained, and Network offers no independent corroboration of legitimacy for those signals). This is a genuine partial-explanation gap, not a clean fraud or clean legitimate call -- the customer's own note covers the amount but not why a brand-new device was used from NL, which could still indicate account/device compromise happening alongside a real, pre-authorized purchase, or could simply be an unmentioned travel/new-device detail. There isn't enough to force a binary verdict either way.",
+    "recordedAt": "2026-08-29T05:39:47.341Z"
+  },
+  {
+    "accountId": "A01054",
+    "verdict": "insufficient_evidence",
+    "confidence": "medium",
+    "reasoning": "Behaviour confirms a stark anomaly: transactions 80-98x the p90 baseline on new device DX01491. Context confirms the new-device/app-channel switch is verified legitimate in-branch (passport ID, case note N00209: lost phone, re-registered app), but explicitly does not authorize the unusually large amounts. Network shows the alerted 66344.54 transaction hit a high-risk gift-card merchant with 17 coincident accounts, the highest coincidence count on record, plus 11 coincident accounts on the preceding restaurant transaction; Network cannot determine if this reflects a broader cross-account fraud ring or just a customer frequenting popular merchants. Specialists only partially explain the alert -- device change is legitimate, but the amount and high-risk merchant coincidence pattern remain unresolved.",
+    "recordedAt": "2026-08-29T05:40:11.933Z"
+  },
+  {
+    "accountId": "A01156",
+    "verdict": "fraud",
+    "confidence": "medium",
+    "reasoning": "Behaviour flags a clear anomaly: four transactions in under 9 hours (14:41-23:41) ranging 11.86x-22.05x the account's p90 spend, against a baseline with 0% decline history -- and one of the four (T0107097, $11,678.47) was itself declined, a first-time event for this account. This burst pushed cumulative spend to 90% of the credit limit (triggering AL0123). Context adds no mitigating explanation -- no case notes, disputes, or customer communication account for the burst. Network shows the device is exclusive to this customer (reducing odds of a shared-device compromise), but two of the four burst transactions -- the gift card purchase T0107096 and a related $2.96 gaming transaction T0102777 -- each coincide with 19 other accounts hitting the same merchants within 48 hours, a hallmark of organized cash-out fraud rings using gift card/gaming vectors. The other two transactions (electronics, jewellery) show unremarkable coincidence. This mixed picture -- strong behavioural anomaly plus a partial (not account-wide) network signal, and no confirming customer/context evidence -- supports a fraud verdict but only medium confidence.</parameter>\n",
+    "recordedAt": "2026-08-29T05:40:31.742Z"
+  },
+  {
+    "accountId": "A00185",
+    "verdict": "fraud",
+    "confidence": "medium",
+    "reasoning": "Behaviour flags a burst of 3 transactions ($52,131.39/$51,257.73/$66,344.15) at 129x-166x the p90 baseline and 200x-265x the mean, from a device (DX01451) with no prior transaction history on this account, against 98 prior low-value transactions since Nov 2025. Context legitimately explains the device change itself -- a branch visit, passport verification, lost-handset report, and registration of DX01451 -- but explicitly confirms no note, dispute, or prior case addresses or authorizes the three high-value transactions that followed hours later. Network confirms both devices are exclusive to this customer (no mule-ring device-sharing signature), which weighs against a straightforward device-takeover/mule narrative, but flags that the largest transaction ($66,344.15) was at a Gift Cards merchant with a 0.93 fraud risk score and 20 other accounts transacting there in the same window -- a pattern the specialist calls typical of fraud/cash-out/mule schemes. This is a mixed picture: the device change is legitimate, the amounts are wildly anomalous and unexplained, and one transaction ties into a suspicious cross-account merchant pattern while two others (fuel, jewellery) do not show that same network signature. The lack of device-sharing evidence and the fact that only one of three transactions carries the high-risk network signal means this doesn't cleanly meet a high-confidence fraud bar -- it's serious but not unanimous across specialists, so I'm calling it fraud at medium confidence rather than high.",
+    "recordedAt": "2026-08-29T05:40:56.213Z"
+  },
+  {
+    "accountId": "A01116",
+    "verdict": "insufficient_evidence",
+    "confidence": "medium",
+    "reasoning": "Behaviour flags the $12,255 transaction as well outside typical pattern. Context partially but not fully explains this: the travel notice (N00076) covers foreign point-of-sale spend in NL from the 15th, but does not account for the specific impossible-travel signature -- two authorisations in different countries under 3 hours apart -- so the R03 trigger itself remains unexplained. No dispute has been filed on T0107293, which cuts against active fraud reporting but is not conclusive either way. The prior confirmed-fraud case (PC0175, closed mid-2025) raises baseline concern for recurrence but is historical and not itself evidence of current compromise. Network found no shared-device linkage (D011160 is exclusive to this customer), weakening the case for coordinated account-takeover fraud, but did surface a genuine anomaly: T0098913 at a high-risk crypto exchange (risk_score 0.89) coincided with 9 other accounts transacting there within 48h -- an unusual pattern worth investigating even though it's not device-linked and is a separate transaction from the trigger event. Taken together, the specialists' findings are mixed rather than convergent: strong anomaly signal, partial-only contextual explanation, no device/network corroboration of takeover, and a merchant-level coincidence that looks more like a network-wide pattern than an account-specific compromise. This does not cleanly support either 'fraud' or 'legitimate' -- it lands as insufficient_evidence but with enough stakes (dual-country auth pattern unexplained, prior fraud history, notable high-risk merchant coincidence) to warrant a human investigator's review rather than closing it out.",
+    "recordedAt": "2026-08-29T05:41:06.865Z"
+  },
+  {
+    "accountId": "A00560",
+    "verdict": "insufficient_evidence",
+    "confidence": "medium",
+    "reasoning": "Behaviour identifies a classic card-testing burst (11 rapid small ecom auths, ~2 min apart, wildly atypical vs the 132-txn baseline) followed by an extreme trigger transaction (44097.31, ~101x baseline p90). Context corroborates fraud on the testing burst specifically: the customer proactively reported (N00064) that they don't recognize the small amounts, have the card in hand, and made no recent online purchases -- directly labeling that burst as unauthorized. However, Context is explicit that the customer's report never addresses the much larger 44097.31 transaction, so that piece is undisputed but also unconfirmed as fraud -- it's an evidentiary gap, not a corroborated finding. Network narrows the threat model but doesn't resolve it: device D005600 is exclusive to this account with no cross-customer linkage (rules out a shared/compromised device or ring), and merchants on both the burst and the large txn are low/moderate risk with unremarkable overlap (no ring signature). Known device/country per Behaviour further argue against a brand-new stolen-device scenario, pointing more toward compromised stored CNP credentials -- but this is inference, not confirmed by any specialist. Because the disputed burst and the undisputed high-value transaction are only loosely linked by timing (not by device, merchant risk, or explicit customer statement), and the largest-dollar event is unaddressed by Context, I can't issue a unified high-confidence fraud verdict covering the whole picture -- hence insufficient_evidence rather than a forced fraud/legitimate binary. Per policy, insufficient_evidence with high stakes (a ~101x-baseline unexplained transaction sitting undisputed) warrants human investigator attention rather than closing as 'none'.",
+    "recordedAt": "2026-08-29T05:41:56.423Z"
+  },
+  {
+    "accountId": "A00236",
+    "verdict": "insufficient_evidence",
+    "confidence": "medium",
+    "reasoning": "Behaviour flags both GB transactions as clear anomalies (63x and 35x baseline p90, new device DX01482, IN-centric baseline 97 percent), which in isolation looks like account takeover. Context partially mitigates this: a note from 12 days prior documents a legitimate reason for GB activity on a second device (son at university using a second device/card for living costs), and there are no disputes or fraud reports on file. But Context also flags that the note does not reference this specific device and the amounts (28272.48 and 15787.83 dollars) are far beyond typical living-cost transactions, so the explanation only partially covers the facts. Network evidence is reassuring but not dispositive since both devices are exclusive to this customer with no shared-device or mule-ring signature, and merchant coincidence risk is low. The specialists disagree in effect: strong anomaly signal from Behaviour versus plausible but incomplete legitimate explanation from Context versus no fraud-ring linkage from Network. This does not cleanly resolve to fraud or legitimate.",
+    "recordedAt": "2026-08-29T05:42:13.933Z"
+  },
+  {
+    "accountId": "A00090",
+    "verdict": "legitimate",
+    "confidence": "high",
+    "reasoning": "Behaviour flagged T0107809 (79,760.34) as anomalous: 254.8x baseline and at night-time. However, Context provides direct, contemporaneous justification: customer visited branch on 26 Feb and explicitly advised staff of intent to purchase jewellery \"this week, value roughly 79,760\" -- an exact match to the transaction amount. Staff proactively warned the customer of potential monitoring and requested they keep phone available for OTP verification, indicating the anticipated nature was documented and accepted by the institution. Network confirms D000900 is exclusive to this customer (iOS since May 2020), with no shared devices or suspicious cross-account linkage. The merchant risk score (0.04) is normal for a high-value jewellery transaction; 9 coincident accounts is expected for an everyday jewellery merchant.",
+    "recordedAt": "2026-08-29T06:35:33.053Z"
+  },
+  {
+    "accountId": "A00985",
+    "verdict": "legitimate",
+    "confidence": "high",
+    "reasoning": "Behaviour detected a genuine anomaly: four consecutive high-value transactions (36,860.75 to 66,339.61) on 2026-02-27 from new device DX01444, each 80–144× baseline, correctly triggering rule R02. Context resolved the anomaly: case note from 27 Feb 07:46 confirms customer completed a legitimate phone upgrade on 14 Feb with re-registration and video KYC verification, fully accounting for the new device appearance. Customer identity is verified. Network isolation shows device DX01444 is exclusive to A00985 with no merchant coordination patterns or links to other suspicious accounts. All three specialists' findings point to benign cause: verified customer activity following an explained device change.",
+    "recordedAt": "2026-08-29T06:36:22.599Z"
+  },
+  {
+    "accountId": "A00985",
+    "verdict": "insufficient_evidence",
+    "confidence": "medium",
+    "reasoning": "Device DX01444 is legitimately verified via video KYC registration (Case note N00080, 14 Feb), which eliminates the possibility of simple device spoofing. The four transactions on 27 Feb total 216,091.17—a severe departure from baseline (80–144x p90), and represent a genuine anomaly in isolation. However, Context explicitly documents that this device legitimacy does NOT address transaction legitimacy—the four transactions themselves remain undocumented in amount, merchant, or purpose. Network analysis found no shared-device links to other accounts and no corresponding fraud patterns in coincident merchant accounts (risk scores 0.27–0.3, within expected range for mainstream merchants), ruling out coordinated network fraud. The rupture in behaviour is real, but the evidence splits between two plausible interpretations: (1) a legitimate customer making undocumented large purchases immediately after device upgrade, or (2) an account compromise by someone with physical or logical access to the verified device. Neither can be ruled out by the available evidence.",
+    "recordedAt": "2026-08-29T06:38:41.612Z"
+  },
+  {
+    "accountId": "A00090",
+    "verdict": "legitimate",
+    "confidence": "high",
+    "reasoning": "Transaction T0107809 (79,760.34 INR) triggered expected fraud signals: 234× baseline p90, occurring at 01:22 in a night-time window with only 3.3% normal activity. However, Context fully explains and mitigates this alert: Customer proactively disclosed a planned wedding jewellery purchase (79,760 INR) in case note N00205 dated 2026-02-26—the amount matches exactly. Staff documented anticipation of the fraud flag and confirmed OTP readiness with the customer prior to the transaction. Device D000900 is exclusive to this account with no shared device network, eliminating device-level takeover indicators. While Network analysis shows the account is linked to high-risk merchant classes (crypto, gift cards, gaming; risk scores 0.58–0.89) with multiple concurrent other accounts at each merchant class, this pattern does not implicate takeover of the current transaction—it is a historical account behaviour pattern. The combination of prior customer disclosure, amount match, known device, and proactive staff coordination strongly indicates legitimate, anticipated activity despite the extreme behavioural anomaly.",
+    "recordedAt": "2026-08-29T06:39:30.159Z"
+  },
+  {
+    "accountId": "A00513",
+    "verdict": "fraud",
+    "confidence": "high",
+    "reasoning": "Three independent specialist streams converge on fraud with strong, corroborating evidence:\n\n**Behaviour**: Account exhibits extreme anomaly—6–7 transactions of 71k–119k each within 32 hours (Feb 27–Mar 1), 139–232x baseline p90. Two transactions originated from new device IDs (DR001, DR002) never before in known baseline. Two transactions (T0106814, T0106815) executed during 01:00–05:59 window when account historically shows only 1% activity. Per-transaction volume is 150+ times normal. This pattern is inconsistent with legitimate account use.\n\n**Context**: Customer provided classic money-mule justification—\"friend asked them to receive money and forward it on\"—rather than explaining legitimate business or personal rationale. Failed to explain new devices, off-hours timing, or transaction legitimacy when directly questioned. Prior card compromise (PC0082, Oct 2025) establishes a 4-month pattern of account vulnerability, increasing likelihood of deliberate exploitation by fraudsters.\n\n**Network**: Device DR001 shared with 4 other customers; DR002 shared with 2 other customers—both introduced 2026-01-21 and active throughout burst. Concurrent activity at 4 high-risk money-transfer merchants (scores 0.75–0.88) shows 15–27 coincident transactions from other accounts per merchant (vs. 12–17 typical overlap), and coordinated gaming/giftcard spikes across 18–19 other accounts. Pattern is consistent with structured mule-ring operation, not independent account compromises.",
+    "recordedAt": "2026-08-29T06:40:34.213Z"
+  },
+  {
+    "accountId": "A00090",
+    "verdict": "legitimate",
+    "confidence": "high",
+    "reasoning": "Behaviour detected a severe 255x baseline anomaly compounded by night-time activity, but Context specialist provided a complete and matching explanation: customer pre-notified the bank one day in advance (2026-02-26) of intent to purchase jewellery worth INR 79,760 for a wedding. The stated amount and purchase category match transaction T0107809 exactly. Customer was advised the transaction may be flagged and to keep OTP available, indicating informed consent. Network specialist confirmed the account operates on a single exclusive device with no sharing, and the merchant is low-risk (0.04) with unremarkable coincident activity. The numerical anomaly, while severe, is fully explained and contextually justified.",
+    "recordedAt": "2026-08-29T06:41:26.219Z"
+  },
+  {
+    "accountId": "A00307",
+    "verdict": "insufficient_evidence",
+    "confidence": "medium",
+    "reasoning": "Behaviour confirms an extreme outlier (310x baseline, far exceeding 20x CLEAR threshold) with anomalous night-time timing (01:33 UTC; only 1.6% of baseline activity), yet Context directly addresses the core fraud hypothesis: case note N00231 documents pre-notification from 25 Feb for exactly the flagged amount (181,500) and stated purpose (daughter's course), with confirmed sufficient limit. This legitimacy claim is credible and unrefuted.\n\nHowever, Context does NOT explain the night-time timing anomaly. Network analysis reveals a concerning pattern: account A00307 exhibits high-risk merchant overlap across money transfer (16 concurrent, riskScore 0.65), gift cards (11 concurrent, riskScore 0.8), gaming/digital (11 concurrent, riskScore 0.7), and crypto (8 concurrent, riskScore 0.86) -- consistent with fraud ring coordination. The flagged transaction itself (Electronics 638) is lower-risk but shows 18 concurrent accounts.\n\nThe evidence presents a genuine tension: pre-notification legitimacy vs. unexplained timing + network pattern suggestive of coordinated fraud activity. The specialists have not determined whether the night-time execution was customer-initiated (e.g. insomnia, time zone confusion) or account compromise, and the network pattern could reflect either shared customer behaviour or ring-level coordination. This is not resolvable to high confidence with current evidence.",
+    "recordedAt": "2026-08-29T06:41:36.997Z"
+  },
+  {
+    "accountId": "A00638",
+    "verdict": "fraud",
+    "confidence": "high",
+    "reasoning": "All three specialist assessments converge on organized fraud with clear supporting evidence:\n\n**Behaviour** (ANOMALOUS): Two discrete bursts of extraordinarily high-value transactions totalling ~$702k across 4 days at crypto/gift card/money transfer merchants—high-risk verticals for fraud. Transaction sizes are 292–296x baseline p90 and 400+ times baseline median, ruling out normal spending variation. The new device origin (DR001) of the first burst adds additional anomaly markers.\n\n**Context** (UNEXPLAINED): The customer's own admission on 2026-03-02 of \"receiving transfers from a friend to forward onward\" directly matches money mule activity—a recognized fraud pattern where a compromised or unwitting account receives funds and forwards them to fraudsters' beneficiaries. The customer provided no explanation for the ~$702k in outbound transactions, filed no dispute, and has no prior case history to contextualize these as legitimate.\n\n**Network** (LINKED to organized network): Device DR001 is continuously shared with four other customer accounts (C00619, C00594, C01039, C00513) from 2026-01-21 through 2026-03-02, spanning the entire high-risk period. The five high-value transactions on 2026-03-01 each show 15–22 concurrent accounts conducting simultaneous high-risk merchant activity (risk scores 0.56–0.81). This concentration of coordinated activity across unrelated accounts at identical merchants within minutes is the hallmark of organized fraud rings, not coincidental consumer behaviour.\n\nThe convergence of unexplained money mule admissions + network-level coordination + extreme transaction anomalies across high-risk merchant verticals constitutes fraud with high confidence.",
+    "recordedAt": "2026-08-29T06:41:38.613Z"
+  },
+  {
+    "accountId": "A00673",
+    "verdict": "fraud",
+    "confidence": "high",
+    "reasoning": "Behaviour confirms multiply compounded anomaly: (1) Six transactions totalling 269,436.54 represent 37x–95x baseline p90 (698.65), far exceeding normal spending. (2) New device DX01432 absent from baseline, all transactions in-app. (3) Geographic footprint (SG, TH, MY, AE, GB) inverts baseline's 82% India concentration. (4) Night-time cluster (01:34–02:19) inverts baseline's 1.5% night activity, occurring during customer's expected sleep window. (5) Impossible travel: Malaysia→UAE→Great Britain within ~27 minutes, geographically and temporally implausible. (6) Baseline is card_present dominant (51%); flagged activity is app channel, a channel shift. Context corroborates: customer denies all transactions, reports device theft on 27 Feb, filed dispute on 3 Mar claiming unauthorized account use—directly aligned with the flagged activity pattern. Network shows device DX01432 is exclusive to this account (not shared), ruling out shared-device compromise, but identifies high-risk merchant pattern (gift cards, crypto) consistent with fraud-to-cash liquidation. No cross-account coordinated activity detected, ruling out organized ring but consistent with isolated account compromise.",
+    "recordedAt": "2026-08-29T06:41:39.622Z"
+  },
+  {
+    "accountId": "A00513",
+    "verdict": "fraud",
+    "confidence": "high",
+    "reasoning": "Behaviour identified severe anomaly: 6 high-value transactions ($47.9k–$120k) over 48 hours, 93–233x baseline size, with 83% occurring during night hours vs. baseline 1% — stark departure from cardholder pattern. Context reveals customer evasion and classic money-mule framing (\"friend asked them to receive and forward\"), with prior confirmed fraud exposure (October 2025 account compromise). Network evidence is decisive: account shares two device IDs (DR001, DR002) with 6 other customer accounts all activated 21 Jan 2026, and all 6 flagged transactions route to high-risk merchants (money transfer, gift card, crypto) coinciding with 14–27 concurrent accounts at those same merchants (risk scores 0.62–0.88). This constellation — behavioural spike + evasive explanation + device sharing across a coordinated merchant network + simultaneous high-risk activity across linked accounts — is consistent with organized money-mule or account-takeover activity, not individual anomaly.",
+    "recordedAt": "2026-08-29T06:41:43.100Z"
+  },
+  {
+    "accountId": "A00719",
+    "verdict": "fraud",
+    "confidence": "high",
+    "reasoning": "Behaviour: Five consecutive app-channel transactions totalling 346,281.32 from new device DX01431 across 5 countries in 36 minutes during night hours violate multiple critical rules simultaneously: velocity (6 in 9 min), impossible travel (5 countries in 36 min), new device activation, and night-time high-value thresholds. Each transaction is 129–201× baseline p90 (394.62 vs 129–201× higher). Largest four historical transactions total <13,000; current burst is 346,281.32. This is a dramatic, unambiguous departure from typical pattern. Context: Customer explicitly reported phone theft on 2026-02-27 and stated they did not authorize transactions, did not change password, and last legitimate use was 2026-02-26. Dispute filed 2026-03-02 corroborates account takeover claim. While Context does not explain the technical mechanism of device registration or access breach, the customer's contemporaneous distress call (same day as the suspicious activity) and explicit denial of authorization directly support fraudulent activity on a compromised account. Network: Device DX01431 shows high-risk merchant coincidence pattern—three flagged transactions hit crypto exchanges (risk 0.57–0.73) with 10–11 concurrent customers within ±48h; additional transactions to gift card merchants (risk 0.80–0.86) with 5–18 concurrent customers. Coincident high-risk merchant clustering within a 36-minute window on a newly registered device is a strong linkage signal for organized fraud ring activity or coordinated account compromise. No shared devices with other accounts, but the coordinated merchant pattern is indicative of systemic fraud.",
+    "recordedAt": "2026-08-29T06:41:45.516Z"
+  },
+  {
+    "accountId": "A00340",
+    "verdict": "fraud",
+    "confidence": "high",
+    "reasoning": "Behaviour confirms extreme anomaly: 6 transactions (€251,748.71) in 36 minutes, all 50-158× baseline p90, night-time burst at 5.7% baseline (AL0109-AL0112 all triggered). Impossible travel flagged across 6 countries on 2 cards (SG→DE 12min, DE→MY 9min, MY→DE 9min). Context shows customer explicitly denies all 6 transactions and filed unauthorised dispute (01 Mar, reason 10.4) stating they were asleep, password unchanged, last legitimate use 26 Feb. Network analysis reveals strong orchestrated pattern: 7 high-value transactions on 27 Feb at extreme-risk merchants (gift cards 0.57, crypto 0.58–0.68 risk), with 10–14 concurrent accounts at the same merchants—classic fraud network signature despite no shared devices. Merchant coincidence timing during fraud burst is decisive evidence of coordinated third-party compromise, not customer-initiated spend.",
+    "recordedAt": "2026-08-29T06:42:15.398Z"
+  },
+  {
+    "accountId": "A00253",
+    "verdict": "fraud",
+    "confidence": "high",
+    "reasoning": "Five identical 50,000 transactions within a 12-hour window (2026-02-27, 03:27–15:27) represent a 119.7x deviation from baseline p90 spend and exhaust 100% of the account's inferred credit limit within 48 hours. Behaviour identifies night-time initiation (03:27:44) and abnormal app channel concentration (83% vs 18% baseline) as compounding anomalies. Network analysis reveals strong merchant-coincidence patterns across high-risk money transfer merchants (risk scores 0.56–0.82) with coordinated activity across 11–19 other concurrent accounts within ±48 hours; the five transactions hit four different money transfer merchants during the burst window. While Context notes a legitimate business banking relationship with expected travel/supplier spending (21 Feb case note), this background does NOT explain the specific deviation: identical transaction amounts, sub-3-hour clustering, night-time channel preference, or the concentration of high-risk money transfer merchants linked to a broader account network pattern. The combination of rapid-fire identical amounts to high-risk merchants, concurrent activity across multiple linked accounts, and abnormal timing/channel mix is consistent with account takeover or coordinated fraud rings, not ordinary business spending variance.",
+    "recordedAt": "2026-08-29T06:42:22.368Z"
+  },
+  {
+    "accountId": "A00121",
+    "verdict": "fraud",
+    "confidence": "high",
+    "reasoning": "Behaviour identified five transactions totalling 376,015.10 within 36 minutes, each 91.5x–122.7x baseline p90 spend (~705.99), occurring at night (03:27-04:03 UTC) with impossible travel spanning SG→MY→TH→AE→US within 3 hours. Context: customer explicitly reported (1) not authorizing device registration received via SMS, (2) no travel, and (3) still holding physical card—direct contradiction of fraudulent activity pattern consistent with account takeover, not customer error. Network found device registration at 03:26:57 UTC (coincident with fraud start) aligned with coordinated high-risk merchant activity: three crypto exchanges (risk scores 0.63–0.86) with 8–10 other accounts showing coincident activity at same merchants/times, and one gift card transaction (0.93 risk score) involving 15 concurrent accounts. This coordination across linked accounts at high-risk merchants during the exact fraud window is a strong directional signal of organized fraud affecting a network of accounts, not random false positives.",
+    "recordedAt": "2026-08-29T06:42:26.844Z"
+  },
+  {
+    "accountId": "A01045",
+    "verdict": "legitimate",
+    "confidence": "high",
+    "reasoning": "BEHAVIOUR isolated metrics (263x p90 baseline, 03:31 night posting at 2.7% historical volume) are indeed anomalous in statistical isolation. However, CONTEXT decisively resolves this anomaly: customer explicitly pre-announced this exact transaction 21 hours in advance via in-app message (26 Feb 06:31), stating intent to purchase a laptop for their daughter's course and requesting amount confirmation. Transaction amount (INR 185,720.49) and purpose align exactly with customer's stated plan. This eliminates the anomaly-in-isolation concern—the customer's behaviour is explained and legitimate. NETWORK finds the specific triggering merchant (Electronics 638, riskScore 0.32, lower-risk) showed 18 coincident accounts, a reasonable level for a high-value legitimate purchase. While the account shows broader elevated activity at high-risk merchant categories (money transfers, crypto, riskScores 0.62–0.89), the specialists explicitly note these network signals do not implicate the triggering transaction T0107857 as fraudulent. Device D010450 is customer-exclusive since May 2020 with no shared-device red flags.",
+    "recordedAt": "2026-08-29T06:42:26.979Z"
+  },
+  {
+    "accountId": "A00464",
+    "verdict": "insufficient_evidence",
+    "confidence": "medium",
+    "reasoning": "Behaviour specialist flags severe anomaly: two large transactions (6.5–9.7x p90 baseline) from Thailand on 2026-02-27 using previously unknown device DX01494 during night hours (04:59 and 08:59 local time) with zero historical night-time activity. This is genuinely anomalous against the account's established India-based, daytime, ~80 median spend pattern.\n\nHowever, Context confirms spouse holds supplementary card on same account with registered second device (DX01494 registered 28 Jan 2026), which explains the multi-device activity and provides plausible legitimacy vector—Thailand travel by spouse is not implausible given the supplementary card arrangement.\n\nNetwork shows no shared-device fraud patterns, merchant coincidence limited to low-risk categories (restaurants, travel, fuel; all risk ≤0.33), and DX01494 isolation consistent with ordinary travel spend.\n\nThe tension: the *magnitude and timing anomalies* (6.5–9.7x spend, night-time hours, new geography) are objectively unusual and inconsistent with the account's baseline. Yet the *account structure* (known spouse card, registered device, low-risk merchants) and *absence of network red flags* prevent a confident fraud verdict. A spouse conducting large purchases in Thailand at odd local hours is unusual but not impossible—jetlag, merchant availability, impulse spending during travel are plausible.\n\nVerdict cannot be forced to `fraud` (high confidence not met; Context provides partial mitigation) nor reasonably to `legitimate` (anomalies too material to dismiss). Evidence is inconclusive; genuine ambiguity remains despite specialist assessments.\"",
+    "recordedAt": "2026-08-29T06:42:30.122Z"
+  },
+  {
+    "accountId": "A00333",
+    "verdict": "fraud",
+    "confidence": "high",
+    "reasoning": "Behaviour flagged extreme amount deviation (76–95x baseline p90 across three transactions of $33,526–$41,287), compounded by severe velocity spike (3 txns in 18 minutes meeting 6+ per 60-min threshold), occurring during night window (03:30–03:48 UTC). Impossible travel AE→TH in 9 minutes is infeasible for legitimate use. Context confirms customer dispute filed 3 Mar claiming unauthorized access, no OTP received, and device registration alert on 27 Feb—consistent with account compromise. Network analysis shows two flagged transactions routed through Crypto exchange 156 (risk_score 0.58) linked to 10 coincident accounts, a known fraud corridor. Pattern across high-risk merchants (gaming 0.78, money transfer 0.65–0.81, gift cards 0.59–0.80 with 14–19 coincident accounts) reinforces organized fraud activity, not casual consumer behavior. All three specialists converge on compromise/fraud assessment with no legitimate explanation reconciling the extreme amounts, velocity, impossible travel, and high-risk merchant routing.",
+    "recordedAt": "2026-08-29T06:42:35.754Z"
+  },
+  {
+    "accountId": "A00090",
+    "verdict": "legitimate",
+    "confidence": "high",
+    "reasoning": "Behaviour identified a strong numerical anomaly: transaction T0107809 (£79,760.34 at 01:22) is 255× the baseline p90 and occurs during a night window when the account averages only 1.7% night activity. However, Context provides complete and corroborating explanation: a case note from 26 Feb documents the customer's explicit pre-notification to branch staff of a planned jewellery purchase for a wedding with value \"roughly 79,760\" — matching the flagged transaction amount precisely. Staff proactively confirmed OTP protocol with the customer and advised of potential high-value transaction flagging, indicating awareness and preparation. Network confirms no compromised device (single device D000900, exclusive to customer), no account linkage concerns, and the jewellery merchant shows low risk (0.04 score). The small-amount incidental transactions on high-risk merchants are unrelated population-level overlap. All three specialist domains converge: the numerical anomaly is fully explained by the customer's documented intent, the transaction is anticipated and properly authenticated, and no fraud indicators or compromised account access are present.",
+    "recordedAt": "2026-08-29T06:47:35.307Z"
+  },
+  {
+    "accountId": "A00985",
+    "verdict": "insufficient_evidence",
+    "confidence": "medium",
+    "reasoning": "Behaviour flagged a 216k spike (77–139x baseline p90) across four transactions on 2026-02-27, a 2,900% departure from typical spend under 100. Context confirms a legitimate device re-registration with video KYC on that same date, explaining the channel shift to app-only. However, Context explicitly notes that the case note does not address the four-transaction spike itself—no explanation for the amounts (64k, 66k, 37k, 49k), merchants, or rationale for spending. Network confirms device DX01444 is exclusive to this account with no shared users, and merchant overlap (9–13 accounts at each merchant) is expected for low-risk everyday categories with scores 0.04–0.3. The spike is temporally correlated with a verified, KYC-validated event (device re-registration), which is a plausible trigger for accessing accumulated budgets or delayed transactions on a new device. However, the absence of any stated business rationale for a 216k outlay across retail, travel, grocery, and utilities on a single day—even if categorically low-risk—remains a gap in the narrative that genuine context alone cannot close. This is not network fraud (no shared devices, no coordinated rings) and not clearly external compromise (device was legitimately re-registered with video KYC), but it is also not yet fully explained transaction-level behavior.",
+    "recordedAt": "2026-08-29T06:48:40.498Z"
+  },
+  {
+    "accountId": "A00090",
+    "verdict": "legitimate",
+    "confidence": "high",
+    "reasoning": "Behaviour specialist identified a numerical anomaly (255x baseline, night-time transaction), but Context specialist fully resolved it: customer pre-disclosed this exact transaction on 2026-02-26, providing both the purpose (wedding jewellery purchase) and the precise amount (79,760). The transaction amount T0107809 (79,760.34) matches the disclosed amount. Network specialist confirmed the device is exclusive to this account, the merchant is low-risk (jewellery, riskScore 0.04), and there is no linkage to other accounts or high-risk patterns. The prior flagged gaming transaction is unrelated. All three specialist domains converge on an authorized, customer-initiated transaction.",
+    "recordedAt": "2026-08-29T06:50:00.491Z"
+  },
+  {
+    "accountId": "A00090",
+    "verdict": "legitimate",
+    "confidence": "high",
+    "reasoning": "All three specialist findings converge on legitimacy. Behaviour confirms both alert premises are false: device D000900 is known (100% baseline presence, not new) and night-time activity is within normal bounds (1.7% baseline vs 5% threshold). Transaction amount of ₹79,760.34 is 254.8x baseline p90 but is consistent with the account's established pattern of high-value transactions. Context provides clear explanation: case note N00205 documents the customer's branch visit on 26 Feb where they explicitly stated intent to purchase jewellery for wedding (~₹79,760), and staff proactively warned about potential flagging. Transaction occurred as planned the next day. Network confirms device D000900 is exclusive to this customer (no sharing), merchant is low-risk (jewellery, risk_score 0.04), and no suspicious network linkage.",
+    "recordedAt": "2026-08-29T06:50:59.052Z"
+  },
+  {
+    "accountId": "A00985",
+    "verdict": "insufficient_evidence",
+    "confidence": "medium",
+    "reasoning": "Behaviour reports a severe anomaly: four consecutive transactions of 36.8k–66.3k on 2026-02-27 (77–139× baseline p90, 59–103× mean), totaling 216k in 3 hours from device DX01444. Context shows the device was legitimately re-registered on 2026-02-14 following KYC-verified phone upgrade, which explains device presence but not the volume spike on the 27th—a 13-day gap inconsistent with upgrade-day activity patterns. Network confirms device exclusivity (no shared rings) and low-risk merchants (0.27–0.3). The upgrade is documented and verified, yet the magnitude and clustering of transactions remain unexplained by that event alone. This is neither clearly fraud (device trusted, merchants routine, no network rings) nor clearly legitimate (anomaly is extreme and timing relative to upgrade is incongruous). A human investigator should examine whether the customer made these purchases intentionally or whether account compromise occurred post-upgrade despite KYC re-registration.\"",
+    "recordedAt": "2026-08-29T06:51:51.977Z"
+  },
+  {
+    "accountId": "A00513",
+    "verdict": "fraud",
+    "confidence": "high",
+    "reasoning": "Three independent specialist teams converge on fraud indicators: (1) BEHAVIOUR: Sustained 8-transaction burst (628,418.63 total) spanning 2026-02-27 to 2026-03-01 with transaction sizes 93–232× baseline p90, five occurring during night hours (02:19, 04:19, 06:19, 08:19, 03:11) contrary to 1% baseline night activity, and two from new unknown devices (DR001, DR002) absent from knownDeviceIds. (2) CONTEXT: Customer evasion during 2026-02-28 case note (\"evasive,\" vague \"friend asked them to receive and forward\" story) with no legitimate explanation for technical anomalies, new devices, night-time pattern, or extreme magnitude. (3) NETWORK: Account embedded in ring of linked accounts via shared devices—DR001 shared with C00638, C00619, C00594, C01039; DR002 shared with C00779, C00925—with both continuously active since 2026-01-21. All 8 transactions occur at high-risk merchants (moneytransfer, risk scores 0.68–0.88) with significant merchant coincidence: 27 accounts at Money transfer 573, 24 at Money transfer 573, 22 at Money transfer 927, 19 at Money transfer 752, and others within ±48 hours, consistent with money-mule or cash-out ring operation. Evidence is specific, multi-dimensional, and unambiguous.",
+    "recordedAt": "2026-08-29T06:56:58.317Z"
+  },
+  {
+    "accountId": "A00513",
+    "verdict": "fraud",
+    "confidence": "high",
+    "reasoning": "Three independent specialist teams converge on fraud: (1) BEHAVIOUR: Sustained 8-transaction burst (628,418.63 total) from 2026-02-27 to 2026-03-01 with transaction sizes 93–232× baseline p90, five during night hours contrary to 1% baseline night activity, and two from new unknown devices (DR001, DR002) not in knownDeviceIds. (2) CONTEXT: Customer evasion documented 2026-02-28 (\"evasive,\" vague \"friend asked them to receive and forward\" story) with no legitimate explanation for technical anomalies, new devices, or extreme magnitude. (3) NETWORK: Account embedded in ring of 6+ linked accounts via shared devices (DR001 with C00638, C00619, C00594, C01039; DR002 with C00779, C00925), all continuously active since 2026-01-21. All 8 transactions at high-risk merchants (moneytransfer, risk 0.68–0.88) with significant merchant coincidence (15–27 other accounts per transaction within ±48 hours), consistent with money-mule or cash-out ring operation. Evidence is specific, multi-dimensional, and unambiguous.",
+    "recordedAt": "2026-08-29T06:57:05.129Z"
+  },
+  {
+    "accountId": "A00513",
+    "verdict": "fraud",
+    "confidence": "high",
+    "reasoning": "Behaviour shows a severe, sustained anomaly: six high-value transactions (totalling $463k, each 139–216× baseline p90) executed across a 8-hour window on 2026-02-27 via app, followed by another burst on Mar 1 ($119.9k, 232× p90). Baseline shows only 1% night-time activity; this account generated transactions at 02:19, 04:19, 06:19 UTC—a dramatic departure in both magnitude, velocity, and timing. Context reveals the account holder was evasive about incoming transfers and admitted to money-mule activity (\"friend asked them to receive money and forward it on\"), a known money-laundering red flag. Network evidence confirms coordinated fraud: the two new devices (DR001, DR002) introduced 2026-01-21 are shared across 6 linked accounts simultaneously. Within 48 hours of A00513's $71.7k transfer to Money Transfer 573, 27 other linked accounts transacted at the same merchant (risk 0.88); within 48 hours of the $119.9k transfer on Mar 1, 24 other accounts followed to the same merchant. Crypto and gift-card merchants show similar coordinated spikes (14 and 18 linked accounts respectively). This pattern—synchronized high-value bursts, shared devices introduced on one date, coordinated merchant access across multiple accounts—is classic organized fraud/money-laundering infrastructure, not random account compromise.",
+    "recordedAt": "2026-08-29T06:58:51.716Z"
+  },
+  {
+    "accountId": "A00513",
+    "verdict": "fraud",
+    "confidence": "high",
+    "reasoning": "Behaviour identified severe anomalies: six high-value transactions totalling $463k (each 139–216× baseline p90) executed in an 8-hour window on 2026-02-27, followed by another $119.9k burst on Mar 1 (232× p90). Baseline shows only 1% night-time activity; flagged transactions occurred at 02:19, 04:19, 06:19, and 03:11 UTC. Context revealed the account holder admitted to money-mule activity (\"friend asked them to receive money and forward it on\") and was evasive about incoming transfers—a known laundering red flag. Account has prior confirmed fraud (October 2025 card compromise). Network evidence is decisive: two new devices (DR001, DR002) introduced simultaneously on 2026-01-21 are shared across 6 linked accounts. Coordinated merchant activity is severe—27 other linked accounts transacted at Money Transfer 573 within 48h of A00513's $71.7k transfer on 2026-02-27; 24 accounts at the same merchant within 48h of the $119.9k transfer on Mar 1. Similar coordinated spikes at crypto (14 accounts) and gift cards (18 accounts). Pattern is consistent with organized fraud/money-laundering infrastructure, not random compromise.",
+    "recordedAt": "2026-08-29T06:59:00.736Z"
+  },
+  {
+    "accountId": "A00090",
+    "verdict": "legitimate",
+    "confidence": "high",
+    "reasoning": "Behaviour identified a genuine anomaly (255x baseline, night-time transaction on known device D000900), but Context fully explains it: the customer pre-notified the branch on 26 Feb of the exact transaction amount (79,760) for a jewellery purchase planned for \"this week,\" and branch staff explicitly warned the customer alerts might trigger. The transaction occurred on 27 Feb as planned. Network confirms the account operates on an exclusive device with no sharing, the jewellery merchant is low-risk (risk_score 0.04), and there is no pattern of coordinated fraud. The two higher-risk historical transactions (gaming, gift cards) are unrelated in time and merchant. All three alerts are explained by legitimate, pre-disclosed customer intent.",
+    "recordedAt": "2026-08-29T07:01:09.553Z"
+  },
+  {
+    "accountId": "A00513",
+    "verdict": "fraud",
+    "confidence": "high",
+    "reasoning": "All three specialists converge on fraud with overwhelming evidence:\n\n**Behaviour:** Extreme deviation from baseline—6 high-value transactions (77k–111k) on 2026-02-27 totalling 470k+, each 93x–216x the p90 baseline (516.06). Three occurred during night hours (01:00–06:00) despite only 1% baseline night fraction. A third night transaction (119k from new device) on 2026-03-01. Total 12+ transactions across 3 days at high-risk merchants.\n\n**Context:** Customer's explanation (case note N00017, 28 Feb) was evasive—claimed \"receiving and forwarding funds on behalf of a friend\"—and staff explicitly flagged this as high-risk. No legitimate explanation provided for the merchant bursts or amounts. Prior case PC0082 (Oct 2025) confirms prior card compromise fraud, establishing takeover vulnerability.\n\n**Network:** Devices DR001 and DR002 (used for transactions T0107965 and T0107966) are shared across 6 other unrelated customers (C00638, C00619, C00594, C01039, C00779, C00925), all activated 2026-01-21 to 2026-03-02 in sync. 8 of 10 flagged transactions are at high-risk money transfer merchants with 15–27 coincident accounts transacting within ±48 hours. Pattern is consistent with organized financial movement or money laundering operation, not coincidence.",
+    "recordedAt": "2026-08-29T07:02:01.152Z"
+  },
+  {
+    "accountId": "A00513",
+    "verdict": "fraud",
+    "confidence": "high",
+    "reasoning": "All three specialists converge on fraud with overwhelming evidence: (1) Behaviour found extreme deviation from baseline—6 high-value transactions (77k–111k) on 2026-02-27 totalling 470k+, each 93x–216x the p90 baseline. Three occurred during night hours despite only 1% baseline night fraction. Third night transaction (119k) on 2026-03-01 from new device. (2) Context found customer's explanation (28 Feb) was evasive—claimed receiving and forwarding funds for a friend—and staff flagged it as high-risk. No legitimate explanation for the merchant bursts. Prior fraud case (Oct 2025) shows card compromise history. (3) Network found devices DR001 and DR002 (used for the two largest transactions) are shared across 6 other unrelated customers with synchronized activation. 8 of 10 flagged transactions at high-risk money transfer merchants with 15–27 coincident accounts transacting within ±48 hours. Pattern is consistent with organized financial movement or money laundering, not coincidence.",
+    "recordedAt": "2026-08-29T07:02:06.782Z"
+  },
+  {
+    "accountId": "A00985",
+    "verdict": "insufficient_evidence",
+    "confidence": "high",
+    "reasoning": "Device legitimacy is established: customer phone upgrade on 14 Feb with video KYC re-registration explains DX01444. Network shows no coordinated fraud signals or merchant overlap red flags. However, Behaviour specialists documented severe transaction anomalies: four transactions totalling 216,091.17 on 27 Feb, each 80–144× customer's baseline p90 (459.62), via app from India on a channel (remote app) that contradicts 13-month pattern of card_present transactions. Context cannot explain the magnitude shift, timing lag (13 days post-device-setup), or channel pivot. This combination—legitimate device but transaction intent and authorization undocumented—creates genuine ambiguity: either account compromise despite device verification, or undocumented customer behaviour change. Verdict cannot be forced to binary fraud/legitimate without customer intent verification.",
+    "recordedAt": "2026-08-29T07:03:10.812Z"
+  },
+  {
+    "accountId": "A00985",
+    "verdict": "insufficient_evidence",
+    "confidence": "high",
+    "reasoning": "Device legitimacy is established via documented phone upgrade on 14 Feb with video KYC re-registration, explaining the new device DX01444. Network analysis shows no coordinated fraud signals or suspicious merchant overlap. However, Behaviour specialists found severe transaction anomalies: four transactions totalling 216,091.17 on 27 Feb, each 80–144× the customer's baseline p90 (459.62), via app channel from India—a stark departure from 13-month pattern of small card_present transactions. Context confirms device is legitimate but cannot explain the magnitude shift, timing lag (13 days post-device-setup), or channel pivot from card_present to remote app. This creates genuine ambiguity: either account compromise despite device verification, or undocumented customer behaviour change. The contradiction between legitimate device and highly anomalous transactions cannot be resolved without customer verification.",
+    "recordedAt": "2026-08-29T07:03:17.553Z"
+  },
+  {
+    "accountId": "A00985",
+    "verdict": "insufficient_evidence",
+    "confidence": "high",
+    "reasoning": "Disposition recorded with inconclusive verdict: Device legitimacy established via 14 Feb phone upgrade with video KYC re-registration (DX01444). Network analysis shows no coordinated fraud or suspicious merchant overlap. Behaviour found severe transaction anomalies: four transactions totalling 216,091.17 on 27 Feb, each 80–144× baseline p90 (459.62), via app from India—departure from 13-month card_present pattern. Genuine ambiguity remains: legitimate device legitimacy contradicts highly anomalous transaction profile, timing lag (13 days post-setup), and channel pivot. Cannot resolve without customer verification. Escalation was requested but rejected by operator. Case disposition stands as insufficient_evidence pending operator resolution or customer contact initiated by other means.",
+    "recordedAt": "2026-08-29T07:03:33.318Z"
+  }
+]

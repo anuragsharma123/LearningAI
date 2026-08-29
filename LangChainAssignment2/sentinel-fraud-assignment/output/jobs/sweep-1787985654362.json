@@ -1,0 +1,77 @@
+{
+  "jobId": "sweep-1787985654362",
+  "status": "stopped",
+  "total": 276,
+  "completed": 11,
+  "startedAt": "2026-08-29T06:40:54.362Z",
+  "results": [
+    {
+      "accountId": "A00090",
+      "verdict": "legitimate",
+      "confidence": "high",
+      "recommendedAction": "none"
+    },
+    {
+      "accountId": "A00307",
+      "verdict": "insufficient_evidence",
+      "confidence": "medium",
+      "recommendedAction": "escalate_case"
+    },
+    {
+      "accountId": "A00673",
+      "verdict": "fraud",
+      "confidence": "high",
+      "recommendedAction": "escalate_case"
+    },
+    {
+      "accountId": "A00638",
+      "verdict": "fraud",
+      "confidence": "high",
+      "recommendedAction": "escalate_case"
+    },
+    {
+      "accountId": "A00513",
+      "verdict": "fraud",
+      "confidence": "high",
+      "recommendedAction": "escalate_case"
+    },
+    {
+      "accountId": "A00719",
+      "verdict": "fraud",
+      "confidence": "high",
+      "recommendedAction": "escalate_case"
+    },
+    {
+      "accountId": "A00340",
+      "verdict": "fraud",
+      "confidence": "high",
+      "recommendedAction": "escalate_case"
+    },
+    {
+      "accountId": "A00253",
+      "verdict": "fraud",
+      "confidence": "high",
+      "recommendedAction": "escalate_case"
+    },
+    {
+      "accountId": "A00121",
+      "verdict": "fraud",
+      "confidence": "high",
+      "recommendedAction": "escalate_case"
+    },
+    {
+      "accountId": "A01045",
+      "verdict": "legitimate",
+      "confidence": "high",
+      "recommendedAction": "none"
+    },
+    {
+      "accountId": "A00464",
+      "verdict": "insufficient_evidence",
+      "confidence": "medium",
+      "recommendedAction": "escalate_case"
+    }
+  ],
+  "errors": [],
+  "finishedAt": "2026-08-29T06:42:48.640Z"
+}

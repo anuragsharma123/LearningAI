@@ -1,0 +1,29 @@
+{
+  "jobId": "sweep-1787979737094",
+  "status": "completed",
+  "total": 3,
+  "completed": 3,
+  "startedAt": "2026-08-29T05:02:17.094Z",
+  "results": [
+    {
+      "accountId": "A00638",
+      "verdict": "fraud",
+      "confidence": "high",
+      "recommendedAction": "escalate_case"
+    },
+    {
+      "accountId": "A00090",
+      "verdict": "legitimate",
+      "confidence": "high",
+      "recommendedAction": "none"
+    },
+    {
+      "accountId": "A00307",
+      "verdict": "insufficient_evidence",
+      "confidence": "medium",
+      "recommendedAction": "escalate_case"
+    }
+  ],
+  "errors": [],
+  "finishedAt": "2026-08-29T05:07:45.765Z"
+}
