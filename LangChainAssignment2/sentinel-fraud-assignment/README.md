@@ -1,13 +1,29 @@
 # Sentinel
 
 A multi-agent fraud triage system built on LangChain.js / LangGraph and Claude
-(Sonnet 5). Reads the alert queue in `data/sentinel.db` and produces a
+(Haiku 4.5). Reads the alert queue in `data/sentinel.db` and produces a
 defensible verdict for each flagged account, citing the specific evidence
 behind it.
 
 The original assignment brief, rubric, and data schema live in
 [`ASSIGNMENT.md`](ASSIGNMENT.md), [`RUBRIC.md`](RUBRIC.md), and
 [`SCHEMA.md`](SCHEMA.md) -- this file is just how to run the code.
+
+## Getting the code
+
+This project lives on its own branch inside a larger personal monorepo --
+cloning pulls in unrelated folders too, so check out the branch and `cd`
+into the actual project path below before doing anything else.
+
+```bash
+git clone git@github.com:anuragsharma123/LearningAI.git
+cd LearningAI
+git checkout sentinel-fraud-assignment
+cd LangChainAssignment2/sentinel-fraud-assignment
+```
+
+Everything from here on (`npm install`, `npm run dev`, etc.) is run from
+that final directory.
 
 ## Setup
 
@@ -38,9 +54,14 @@ specialists (Behaviour → Context → Network → Disposition, in that order),
 and prints the final verdict as JSON: `verdict`, `confidence`, `reasoning`,
 and `recommendedAction` (`block_card` / `escalate_case` / `none`).
 
-If `recommendedAction` is not `none`, it has been **recorded but not
-executed** -- see [Approving an action](#approving-an-action-block_card--escalate_case)
-below.
+If `recommendedAction` is not `none`, the CLI immediately prompts you at the
+terminal -- it shows the exact pending action and Disposition's reason, then
+asks `Approve? [y/N]`. Only on `y` does it actually execute the action
+(through the interruptible Disposition agent); anything else rejects it.
+Nothing irreversible ever happens without that prompt. See
+[Approving an action](#approving-an-action-block_card--escalate_case) below
+for what's happening under the hood, and how to do the same thing
+programmatically (e.g. for the sweep, where nothing prompts automatically).
 
 ## Running the full queue sweep
 
@@ -76,7 +97,12 @@ separate. The supervisor / sweep only ever recommends and records a
 verdict -- it can never block a card or escalate a case itself, so a sweep of
 276 accounts never needs a human standing by.
 
-To actually carry out a recommended action, run it through the interruptible
+**Single-case runs (`npm run dev -- <accountId>`) handle this for you** --
+see above. What follows is what that prompt is doing under the hood, useful
+if you're approving a recommendation that came out of a sweep instead, where
+nothing prompts automatically since no human is watching a sweep run.
+
+Carrying out a recommended action means running it through the interruptible
 Disposition agent directly (`src/specialists/disposition/agent.ts`), which
 pauses for approval before doing anything irreversible:
 
