@@ -10,6 +10,11 @@ export const getTimeTool = defineTool({
       .default("UTC")
       .describe("IANA timezone name, e.g. 'Asia/Kolkata' or 'UTC'"),
   },
+  annotations: {
+    readOnlyHint: true,
+    idempotentHint: false, // returns a different value each call
+    openWorldHint: false,
+  },
   handler: async ({ timezone }) => {
     const now = new Date();
     const formatted = new Intl.DateTimeFormat("en-US", {

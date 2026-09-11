@@ -78,7 +78,7 @@ async function main() {
     console.log(`Copying boilerplate into ${destPath}...`);
     mkdirSync(destPath, { recursive: true });
     cpSync(join(boilerplateRoot, "src"), join(destPath, "src"), { recursive: true });
-    for (const file of ["tsconfig.json", ".eslintrc.json", ".gitignore"]) {
+    for (const file of ["tsconfig.json", ".eslintrc.json", ".gitignore", ".env.example"]) {
       cpSync(join(boilerplateRoot, file), join(destPath, file));
     }
 
@@ -88,38 +88,68 @@ async function main() {
     pkg.name = pkgName;
     pkg.version = "0.1.0";
     delete pkg.scripts.scaffold;
+    // The boilerplate's own scripts/ (this scaffolder) isn't copied into the
+    // destination project, so drop the parts of typecheck/lint that point at it.
+    pkg.scripts.typecheck = "tsc --noEmit";
+    pkg.scripts.lint = "eslint src --ext .ts";
     writeFileSync(join(destPath, "package.json"), JSON.stringify(pkg, null, 2) + "\n");
 
-    const indexTsPath = join(destPath, "src", "index.ts");
-    const indexTs = readFileSync(indexTsPath, "utf-8").replace(
-      /name: "mcp-server-boilerplate"/,
-      `name: "${pkgName}"`
+    // src/server.ts is the one place the server's identity lives — every
+    // entrypoint (HTTP, stdio) and their log lines inherit SERVER_NAME from
+    // it, so patching it here is enough.
+    const serverTsPath = join(destPath, "src", "server.ts");
+    const serverTs = readFileSync(serverTsPath, "utf-8").replace(
+      /SERVER_NAME = "mcp-server-boilerplate"/,
+      `SERVER_NAME = "${pkgName}"`
     );
-    writeFileSync(indexTsPath, indexTs);
+    writeFileSync(serverTsPath, serverTs);
 
     const readme = `# ${pkgName}
 
 MCP tools for ${projectName}, scaffolded from boilerplate-mcpServers.
+Runs over Streamable HTTP by default — one URL to register, no subprocess.
 
 ## Setup
 
 \`\`\`bash
 cd ${subfolder}
+cp .env.example .env
 npm install
 npm run build
 \`\`\`
 
+## Run
+
+\`\`\`bash
+npm run dev      # tsx, no build step, for local iteration
+npm start          # run the compiled dist/index.js
+\`\`\`
+
+Listens on \`http://localhost:$PORT/mcp\` (default port 3333;
+\`GET /healthz\` for a no-auth status check).
+
 ## Adding a new tool
 
 See \`src/tools/index.ts\` — add a file under \`src/tools/\` using \`defineTool\`
-from \`src/tools/types.ts\`, then register it in the \`tools\` array.
+from \`src/tools/types.ts\` (set \`annotations.readOnlyHint\`/\`destructiveHint\`
+honestly — a registry may use them to decide what needs approval), then
+register it in the \`tools\` array.
 
-## Connecting to Claude Code
+## Registering this server
 
-Run from inside \`${projectName}/\`:
+Paste \`http://localhost:$PORT/mcp\` wherever an MCP server address is
+expected — an MCP registry, the MCP Inspector, or Claude Code:
 
 \`\`\`bash
-claude mcp add ${pkgName} -- node ${subfolder}/dist/index.js
+claude mcp add --transport http ${pkgName} http://localhost:3333/mcp
+\`\`\`
+
+Prefer a subprocess Claude Code launches itself instead of a URL? Use the
+stdio entrypoint:
+
+\`\`\`bash
+npm run build
+claude mcp add ${pkgName} -- node dist/stdio.js
 \`\`\`
 `;
     writeFileSync(join(destPath, "README.md"), readme);
@@ -128,9 +158,12 @@ claude mcp add ${pkgName} -- node ${subfolder}/dist/index.js
     execFileSync("npm", ["install"], { cwd: destPath, stdio: "inherit" });
 
     console.log(`\nDone. Next steps:
-  cd ${targetProjectPath}
-  npm run build --prefix ${subfolder}
-  claude mcp add ${pkgName} -- node ${subfolder}/dist/index.js
+  cd ${targetProjectPath}/${subfolder}
+  cp .env.example .env
+  npm run build
+  npm start
+  # in another terminal:
+  claude mcp add --transport http ${pkgName} http://localhost:3333/mcp
 `);
   } finally {
     rl.close();

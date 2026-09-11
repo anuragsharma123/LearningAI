@@ -7,6 +7,10 @@ export const echoTool = defineTool({
   inputSchema: {
     message: z.string().describe("Text to echo back"),
   },
+  annotations: {
+    readOnlyHint: true,
+    idempotentHint: true,
+  },
   handler: async ({ message }) => {
     return {
       content: [{ type: "text", text: message }],
